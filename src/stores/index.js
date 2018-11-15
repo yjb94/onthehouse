@@ -1,6 +1,9 @@
-import HamburgerStore from './hamburger';
-const hamburger = new HamburgerStore();
+import hamburger from './hamburger';
+import scroll from './scroll';
+import screen from './screen';
 
 export default {
-    hamburger:hamburger
+    hamburger:hamburger,
+    scroll:scroll,
+    screen:screen,
 }

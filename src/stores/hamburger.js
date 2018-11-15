@@ -1,6 +1,6 @@
 import { observable, action } from 'mobx';
 
-export default class HamburgerStore {
+class HamburgerStore {
     @observable isOpen = false;
 
     @action open = () => {
@@ -11,3 +11,4 @@ export default class HamburgerStore {
         this.isOpen = false;
     }
 }
+export default new HamburgerStore();

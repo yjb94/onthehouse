@@ -12,6 +12,7 @@ const Container = Styled.footer`
     justify-content: center;
     align-items: center;
     color:#999;
+    margin-top: 120px;
 `;
 
 export default class Footer extends React.Component {

@@ -3,12 +3,16 @@ import Main from './Main';
 import Header from './Header';
 import Footer from './Footer';
 import Styled, { createGlobalStyle } from "styled-components";
+import { inject } from 'mobx-react';
 
 const propTypes = {};
 
 const defaultProps = {};
 
 const GlobalStyle = createGlobalStyle`
+    body {
+        margin: 0;
+    }
     button {
         padding: 0;
         border: none;
@@ -27,7 +31,34 @@ const RootContainer = Styled.div`
     height: -webkit-fill-available;
 `;
 
-export default class App extends React.Component {
+@inject(store => ({
+    onScroll:store.scroll.onScroll,
+    resize:store.screen.resize,
+}))
+class App extends React.Component {
+
+
+    componentDidMount = () => {
+        window.addEventListener('scroll', this.scrollListener);
+        window.addEventListener('resize', this.resizeListener);
+        this.scrollListener();
+    }
+    componentWillUnmount = () => {
+        window.removeEventListener('scroll', this.scrollListener);
+        window.removeEventListener('resize', this.resizeListener);
+    }
+    resizeListener = () => {
+        this.scrollListener();
+        const { resize } = this.props;
+        resize();
+    }
+    
+    scrollListener = () => {
+        const { onScroll } = this.props;
+        onScroll();
+    }
+    
+
     render() {
         return (
             <RootContainer>
@@ -42,3 +73,5 @@ export default class App extends React.Component {
 
  App.propTypes = propTypes;
  App.defaultProps = defaultProps;
+
+ export default App;

@@ -11,6 +11,17 @@ const defaultProps = {};
 const Container = Styled.div`
     display:flex;
     overflow: hidden;
+    padding: 0px 100px;
+
+    @media (max-width: 1024px) {
+        padding: 0px 30px;
+    }
+    @media (max-width: 764px) {
+        padding: 0px 20px;
+    }
+    @media (max-width: 480px) {
+        padding: 0px 10px;
+    }
 `;
 
 let fakeData = [];
