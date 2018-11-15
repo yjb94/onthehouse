@@ -1,25 +1,58 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Styled from "styled-components";
-import { decorate, observable, action } from 'mobx';
-import { observer } from 'mobx-react';
+import { observer, inject } from 'mobx-react';
 
-const Conatiner = Styled.div`
+const Conatiner = Styled.button`
+    width: 30px;
+    height: 20px;
+    position: relative;
+    transform: rotate(0deg);
+    transition: .5s ease-in-out;
+
+    span:nth-child(1) {
+        transform: ${props => props.isOpen ? "rotate(45deg)" : "rotate(0deg)"};
+        top: ${props => props.isOpen ? "-1px" : "0px"};
+        /* left: ${props => props.isOpen ? "1px" : "auto"}; */
+        transform-origin: left center;
+    }
+    span:nth-child(2) {
+        opacity: ${props => props.isOpen ? "0" : "1"};
+        width: ${props => props.isOpen ? "0%" : "100%"};
+        top: 9px;
+        transform-origin: left center;
+    }
+    span:nth-child(3) {
+        top: ${props => props.isOpen ? "20px" : "18px"};
+        /* left: ${props => props.isOpen ? "1px" : "auto"}; */
+        transform: ${props => props.isOpen ? "rotate(-45deg)" : "rotate(0deg)"} ;
+        transform-origin: left center;
+    }
 `;
-const Line = Styled.div`
-    border: 1px solid black;
+const Line = Styled.span`
+    display: block;
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    background: black;
+    opacity: 1;
+    left: 0;
+    transform: rotate(0deg);
+    transition: .25s ease-in-out;
 `;
 
-const propTypes = {
-    isOpen:PropTypes.bool.isRequired
-};
-
-const defaultProps = {};
-
+@inject('hamburger')
+@observer
 class HamburgerMenu extends React.Component {
+    onToggle = () => {
+        const { hamburger } = this.props;
+        hamburger.isOpen ? hamburger.close() : hamburger.open();
+    }
+
     render() {
+        const { hamburger } = this.props;
+
         return (
-            <Conatiner>
+            <Conatiner onClick={this.onToggle} isOpen={hamburger.isOpen}>
                 <Line/>
                 <Line/>
                 <Line/>
@@ -28,13 +61,7 @@ class HamburgerMenu extends React.Component {
     }
 }
 
-HamburgerMenu.propTypes = propTypes;
-HamburgerMenu.defaultProps = defaultProps;
+HamburgerMenu.defaultProps = {
+};
 
-decorate(HamburgerMenu, {
-    isOpen: observable,
-    open: action,
-    close: action
-})
-
-export default observer(HamburgerMenu);
+export default HamburgerMenu;
