@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Styled from "styled-components";
+import { decorate, observable, action } from 'mobx';
+import { observer } from 'mobx-react';
 
 const Conatiner = Styled.div`
 `;
@@ -14,7 +16,7 @@ const propTypes = {
 
 const defaultProps = {};
 
-export default class HamburgerMenu extends React.Component {
+class HamburgerMenu extends React.Component {
     render() {
         return (
             <Conatiner>
@@ -26,5 +28,13 @@ export default class HamburgerMenu extends React.Component {
     }
 }
 
- HamburgerMenu.propTypes = propTypes;
- HamburgerMenu.defaultProps = defaultProps;
+HamburgerMenu.propTypes = propTypes;
+HamburgerMenu.defaultProps = defaultProps;
+
+decorate(HamburgerMenu, {
+    isOpen: observable,
+    open: action,
+    close: action
+})
+
+export default observer(HamburgerMenu);

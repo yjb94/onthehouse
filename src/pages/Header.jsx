@@ -10,7 +10,8 @@ const propTypes = {
 const defaultProps = {};
 
 const Container = Styled.header`
-
+    display:flex;
+    flex-direction:row;
 `;
 
 export default class Header extends React.Component {
