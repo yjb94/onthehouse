@@ -25,3 +25,5 @@ yarn-error.log*
 # cloud functions
 functions/*
 .firebase/*
+
+firebase-debug\.log

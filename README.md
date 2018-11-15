@@ -77,3 +77,11 @@ then chekc if it works
 for somewhat reason this occured crash between @babel/plugin-proposal-decorators. so add this again if needed
 
 > yarn add @babel/plugin-proposal-class-properties @babel/plugin-proposal-decorators
+
+
+10. develop code for basic version
+
+11. made script for deploy
+> yarn buld \
+firebase deploy
+
