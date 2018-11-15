@@ -83,3 +83,8 @@ firebase deploy
 > yarn add react-router-dom
 
 set rotuer files(see code)
+
+12. install firebase into project
+> yarn add firebase
+
+adding this is for firebase app controlling

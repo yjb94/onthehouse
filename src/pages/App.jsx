@@ -6,6 +6,7 @@ import { Route, IndexRoute } from 'react-router-dom';
 import { inject } from 'mobx-react';
 import * as routes from '../constants/routes';
 import * as pages from './PageExporter';
+import { firebaseApp } from '../module/firebase';
 
 const propTypes = {};
 
@@ -36,8 +37,23 @@ const RootContainer = Styled.div`
 @inject(store => ({
     onScroll:store.scroll.onScroll,
     resize:store.screen.resize,
+    user:store.auth.user
 }))
 class App extends React.Component {
+    componentWillMount = () => {
+        firebaseApp.auth().onAuthStateChanged((currentUser) => {
+            //get user data
+            console.log('auth state change', currentUser);
+        });
+    }
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.user) {
+            // handle after login
+            console.log('logged in');
+            // this.props.history.push('/');
+        }
+    }
+
     componentDidMount = () => {
         window.addEventListener('scroll', this.scrollListener);
         window.addEventListener('resize', this.resizeListener);
@@ -61,7 +77,6 @@ class App extends React.Component {
     
 
     render() {
-
         return (
             <RootContainer>
                 <GlobalStyle/>

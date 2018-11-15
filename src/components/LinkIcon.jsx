@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Styled from "styled-components";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { addIcon } from '../library/fontawesome';
+import { addIcon } from '../module/fontawesome';
 
 const propTypes = {
     link:PropTypes.string.isRequired,
