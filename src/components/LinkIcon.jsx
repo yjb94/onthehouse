@@ -35,7 +35,6 @@ const Container = Styled.button`
     flex-direction:row;
     align-items:center;
     justify-content:center;
-    font-size: 16px;
     width: 30px;
     height: 30px;
     display: flex;

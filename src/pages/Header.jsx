@@ -41,8 +41,9 @@ const RightContainer = Styled.div`
 `;
 const IconContainer = Styled.div`
     margin-left: 8px;
-    background:${props => props.color};
-    color:white;
+    background:${props => props.background || 'transparent'};
+    color:${props => props.color || 'transparent'};
+    font-size:20px;
     border-radius:50%;
 `;
 
@@ -67,19 +68,13 @@ class Header extends React.Component {
                 </MiddleContainer>
                 {!isMobileSize &&
                     <RightContainer>
-                        <IconContainer color="linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%)">
+                        <IconContainer color="#333">
                             <LinkIcon 
                                 link="https://www.instagram.com/songsong.yo/"
                                 icon={instagram}
                             />
                         </IconContainer>
-                        <IconContainer color="red">
-                            <LinkIcon 
-                                link="#"
-                                iconName={"plane"}
-                            />
-                        </IconContainer>
-                        <IconContainer color="#2eb300">
+                        <IconContainer color="#333">
                             <LinkIcon 
                                 link="http://blog.naver.com/onthehouse_"
                                 iconName={"square"}
