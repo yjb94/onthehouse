@@ -1,8 +1,8 @@
 import React from 'react';
 import Styled from "styled-components";
 import faker from 'faker';
-import Card from '../components/DataDisplay/Card';
-import Masonry from '../components/DataDisplay/Masonry';
+import Card from '../../components/DataDisplay/Card';
+import Masonry from '../../components/DataDisplay/Masonry';
 
 const propTypes = {};
 
@@ -38,7 +38,7 @@ function generateFakeData() {
 }
 generateFakeData();
 
-export default class Main extends React.Component {
+export default class Home extends React.Component {
     render() {
         let cardViews = fakeData.map((each, idx) => {
             return <Card key={idx} {...each}/>
@@ -52,5 +52,5 @@ export default class Main extends React.Component {
     }
 }
 
- Main.propTypes = propTypes;
- Main.defaultProps = defaultProps;
+Home.propTypes = propTypes;
+Home.defaultProps = defaultProps;

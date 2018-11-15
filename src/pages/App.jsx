@@ -1,9 +1,11 @@
 import React from 'react';
-import Main from './Main';
 import Header from './Header';
 import Footer from './Footer';
 import Styled, { createGlobalStyle } from "styled-components";
+import { Route, IndexRoute } from 'react-router-dom';
 import { inject } from 'mobx-react';
+import * as routes from '../constants/routes';
+import * as pages from './PageExporter';
 
 const propTypes = {};
 
@@ -36,8 +38,6 @@ const RootContainer = Styled.div`
     resize:store.screen.resize,
 }))
 class App extends React.Component {
-
-
     componentDidMount = () => {
         window.addEventListener('scroll', this.scrollListener);
         window.addEventListener('resize', this.resizeListener);
@@ -47,6 +47,7 @@ class App extends React.Component {
         window.removeEventListener('scroll', this.scrollListener);
         window.removeEventListener('resize', this.resizeListener);
     }
+    
     resizeListener = () => {
         this.scrollListener();
         const { resize } = this.props;
@@ -60,11 +61,17 @@ class App extends React.Component {
     
 
     render() {
+
         return (
             <RootContainer>
                 <GlobalStyle/>
                 <Header/>
-                <Main/>
+
+                <Route exact path={routes.LANDING} component={pages.Home}/>
+                <Route exact path={routes.HOME}    component={pages.Home}/>
+                <Route exact path={routes.SIGN_IN} component={pages.SignIn}/>
+                <Route exact path={routes.SIGN_UP} component={pages.SignUp}/>
+
                 <Footer/>
             </RootContainer>
         );

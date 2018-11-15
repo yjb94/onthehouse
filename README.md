@@ -22,21 +22,20 @@ Firebase cloud functions(TypeScript) / firebase storage / firebase realtime data
 4. firbase initialize [How to](https://medium.com/@bensigo/hosting-your-react-app-with-firebase-hosting-add1fa08c214)
 > firebase init
 
-#### default setup
+**default setup**
 select database / functions / hosting.
-
 select project from step 3.
-#### database setup
+
+**database setup**
 use database rules.
-#### functions setup
+
+**functions setup**
 use TypeScript
-
 use TSLint
-
 write all files and dependencies
-#### Hosting setup
-select **build** for your project's public directory
 
+**Hosting setup**
+select **build** for your project's public directory
 select no for SPA.
 
 5. test deployment
@@ -57,15 +56,10 @@ then chekc if it works
 8. Gabia + firebase domain connection
 
     first : go to [console hosting](https://console.firebase.google.com/u/0/project/onthe-house/hosting/main)
-    
     second : add domain with setup and go to step 2 then copy the txt record
-
     third : go to gabia main site and go to DNS record setting
-
     fourth : add txt record with @ key
-
     fifth : confirm in firebase console and check it. (can take few minutes to wait)
-
     sixth : follow the steps in step 3. do as what you did before
 
 9. add [react fontawesome](https://fontawesome.com/how-to-use/on-the-web/using-with/react)
@@ -85,3 +79,7 @@ for somewhat reason this occured crash between @babel/plugin-proposal-decorators
 > yarn buld \
 firebase deploy
 
+11. add react-router-dom
+> yarn add react-router-dom
+
+set rotuer files(see code)
