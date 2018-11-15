@@ -12,7 +12,6 @@ const Conatiner = Styled.button`
     span:nth-child(1) {
         transform: ${props => props.isOpen ? "rotate(45deg)" : "rotate(0deg)"};
         top: ${props => props.isOpen ? "-1px" : "0px"};
-        /* left: ${props => props.isOpen ? "1px" : "auto"}; */
         transform-origin: left center;
     }
     span:nth-child(2) {
@@ -23,7 +22,6 @@ const Conatiner = Styled.button`
     }
     span:nth-child(3) {
         top: ${props => props.isOpen ? "20px" : "18px"};
-        /* left: ${props => props.isOpen ? "1px" : "auto"}; */
         transform: ${props => props.isOpen ? "rotate(-45deg)" : "rotate(0deg)"} ;
         transform-origin: left center;
     }
@@ -31,7 +29,7 @@ const Conatiner = Styled.button`
 const Line = Styled.span`
     display: block;
     position: absolute;
-    height: 3px;
+    height: 2px;
     width: 100%;
     background: black;
     opacity: 1;
