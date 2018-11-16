@@ -9,7 +9,7 @@ import * as pages from './PageExporter';
 import { firebaseApp } from '../module/firebase';
 import Slider from '../components/Feedback/Slider';
 import HamburgerMenu from '../components/Button/HamburgerMenu';
-import { getHeaderHeight } from '../utils/utils';
+import NavigationMenu from '../components/Navigation/NavigationMenu';
 
 const propTypes = {};
 
@@ -96,6 +96,7 @@ class App extends React.Component {
                 <GlobalStyle/>
 
                 <Slider>
+                    <NavigationMenu/>
                 </Slider>
 
                 <HamburgerMenu/>
@@ -103,10 +104,10 @@ class App extends React.Component {
                 <Header/>
 
                 <Contents top={headerHeight}>
-                    <Route exact path={routes.LANDING} component={pages.Home}/>
-                    <Route exact path={routes.HOME}    component={pages.Home}/>
-                    <Route exact path={routes.SIGN_IN} component={pages.SignIn}/>
-                    <Route exact path={routes.SIGN_UP} component={pages.SignUp}/>
+                    <Route exact path={routes.LANDING.route} component={pages.Home}/>
+                    <Route exact path={routes.HOME.route}    component={pages.Home}/>
+                    <Route exact path={routes.SIGN_IN.route} component={pages.SignIn}/>
+                    <Route exact path={routes.SIGN_UP.route} component={pages.SignUp}/>
                 </Contents>
 
                 <Footer/>

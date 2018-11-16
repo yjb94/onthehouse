@@ -1,6 +1,8 @@
-export const HOME = '/home';
-export const LANDING = '/';
-export const SIGN_UP = '/signup';
-export const SIGN_IN = '/signin';
-export const ACCOUNT = '/account';
-export const PASSWORD_FORGET = '/forgot';
+export const DEFAULT_ROUTE = { route:'/', name:'' };
+
+export const HOME = { route:'/home', name:'home' };
+export const LANDING = DEFAULT_ROUTE;
+export const SIGN_UP = { route:'/signup', name:'Sign Up' };
+export const SIGN_IN = { route:'/signin', name:'Sign In' };
+export const ACCOUNT = { route:'/account', name:'Account' };
+export const PASSWORD_FORGET = { route:'/forgot', name:'Password Forget' };
