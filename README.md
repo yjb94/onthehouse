@@ -6,7 +6,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ### `Front-end`
 
-create-react-app / mobx / styled-component
+create-react-app / mobx / styled-component / Airbnb Style Guideline
 
 ### `Back-end`
 
@@ -88,3 +88,11 @@ set rotuer files(see code)
 > yarn add firebase
 
 adding this is for firebase app controlling
+
+13. firebase + react router error fix
+
+[reference](https://stackoverflow.com/questions/27928372/react-router-urls-dont-work-when-refreshing-or-writting-manually)
+
+redirect widlcard(*) to /index.html
+
+it's because of server side routing conflicts with client side routing
