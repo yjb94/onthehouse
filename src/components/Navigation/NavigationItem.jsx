@@ -9,12 +9,15 @@ const Conatiner = Styled.div`
     position:flex;
 `;
 
-@inject('slider')
+@inject(store => ({
+    closeSlider:store.slider.close
+}))
 @observer
 class NavigationItem extends React.Component {
     onNav = () => {
-        const { history, data } = this.props;
+        const { history, data, closeSlider } = this.props;
         history.push(data.route)
+        closeSlider();
     }
 
     render() {
