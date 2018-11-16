@@ -1,14 +1,14 @@
 import { observable, action } from 'mobx';
 
-const FIXED_OFFSET = 0;
+const SCROLL_OFFSET = 0;
 
 class ScrollStore {
     @observable offset = 0;
-    @observable isFixed = this.offset > FIXED_OFFSET;
+    @observable isScrolled = this.offset > SCROLL_OFFSET;
 
     @action onScroll = () => {
         this.offset = window.pageYOffset;
-        this.isFixed = window.pageYOffset > FIXED_OFFSET;
+        this.isScrolled = window.pageYOffset > SCROLL_OFFSET;
     }
 }
 export default new ScrollStore();

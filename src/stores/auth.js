@@ -24,5 +24,9 @@ class AuthStore {
             .then(this.handleFirebaseLogin)
             .catch(this.handleFirebaseError);
     }
+    @action logout = () => {
+        this.user = null;
+        return firebaseApp.auth().signOut();
+    }
 }
 export default new AuthStore();

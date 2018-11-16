@@ -1,7 +1,6 @@
 import React from 'react';
 import Styled from "styled-components";
-import HamburgerMenu from '../components/HamburgerMenu';
-import LinkIcon from '../components/LinkIcon';
+import LinkIcon from '../components/Button/LinkIcon';
 import instagram from '@fortawesome/fontawesome-free-brands/faInstagram'
 import { observer, inject } from 'mobx-react';
 
@@ -10,12 +9,12 @@ const Container = Styled.header`
     flex-direction:row;
     align-items:center;
     padding: 40px 30px;
+    max-height: 100px;
     top: 0;
     left: 0;
     right: 0;
     background-color:white;
-
-    position: ${props => props.fixed ? "fixed" : "inherit"};
+    position: fixed;
 `;
 const LeftContainer = Styled.div`
     display:flex;
@@ -48,20 +47,23 @@ const IconContainer = Styled.div`
 `;
 
 @inject(store => ({
-    scrollOffset:store.scroll.isFixed,
-    isMobileSize:store.screen.isMobileSize
+    isMobileSize:store.screen.isMobileSize,
+    setHeaderHeight:store.screen.setHeaderHeight,
 }))
 @observer
 class Header extends React.Component {
-    render() {
-        const { scrollOffset, isMobileSize } = this.props;
+    componentDidMount = () => {
+        const { setHeaderHeight } = this.props;
+        setHeaderHeight();
+    }
+    
 
-        let isFixed = scrollOffset > 0;
+    render() {
+        const { isMobileSize } = this.props;
 
         return (
-            <Container fixed={isFixed}>
+            <Container id="header">
                 <LeftContainer>
-                    <HamburgerMenu/>
                 </LeftContainer>
                 <MiddleContainer>
                     ON THE HOUSE

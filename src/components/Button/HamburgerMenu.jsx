@@ -1,13 +1,16 @@
 import React from 'react';
 import Styled from "styled-components";
 import { observer, inject } from 'mobx-react';
+import zIndex from '../../constants/zIndex';
 
 const Conatiner = Styled.button`
     width: 30px;
     height: 20px;
-    position: relative;
+    position: fixed;
     transform: rotate(0deg);
     transition: .5s ease-in-out;
+    z-index:${zIndex.Hamburger}
+    margin: 50px;
 
     span:nth-child(1) {
         transform: ${props => props.isOpen ? "rotate(45deg)" : "rotate(0deg)"};
@@ -38,19 +41,19 @@ const Line = Styled.span`
     transition: .25s ease-in-out;
 `;
 
-@inject('hamburger')
+@inject('slider')
 @observer
 class HamburgerMenu extends React.Component {
     onToggle = () => {
-        const { hamburger } = this.props;
-        hamburger.isOpen ? hamburger.close() : hamburger.open();
+        const { slider } = this.props;
+        slider.isOpen ? slider.close() : slider.open();
     }
 
     render() {
-        const { hamburger } = this.props;
+        const { slider } = this.props;
 
         return (
-            <Conatiner onClick={this.onToggle} isOpen={hamburger.isOpen}>
+            <Conatiner onClick={this.onToggle} isOpen={slider.isOpen}>
                 <Line/>
                 <Line/>
                 <Line/>

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Styled from "styled-components";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { addIcon } from '../module/fontawesome';
+import { addIcon } from '../../module/fontawesome';
 
 const propTypes = {
     link:PropTypes.string.isRequired,
@@ -44,7 +44,7 @@ const Container = Styled.button`
 
 export default class LinkIcon extends React.Component {
     linkTo = () => {
-        window.location.href = this.props.link
+        window.open(this.props.link, '_blank')
     }
 
     componentWillMount() {

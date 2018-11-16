@@ -27,7 +27,7 @@ class SignUp extends React.Component {
             passwordCfm:'',
         }
     }
-    
+
     onInputChange = (e) => {
         e.preventDefault();
         let state = {};
@@ -73,7 +73,9 @@ class SignUp extends React.Component {
                         value={passwordCfm}
                         onChange={this.onInputChange}
                     />
-                    <SubmitButton/>
+                    <SubmitButton 
+                        onClick={this.onSubmit}
+                    />
                 </Form>
             </Container>
         );
