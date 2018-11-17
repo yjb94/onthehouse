@@ -23,7 +23,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # cloud functions
-functions/*
+functions/node_modules/*
 .firebase/*
 
 firebase-debug\.log

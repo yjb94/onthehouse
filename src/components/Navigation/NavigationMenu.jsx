@@ -1,10 +1,10 @@
 import React from 'react';
 import Styled from "styled-components";
 import { observer, inject } from 'mobx-react';
-import { HOME, SIGN_IN, SIGN_UP, ACCOUNT, PASSWORD_FORGET } from '../../constants/routes';
+import { HOME, SIGN_IN, SIGN_UP, ACCOUNT } from '../../constants/routes';
 import NavigationItem from './NavigationItem';
 
-const NavigationRoutes = [ HOME, SIGN_IN, SIGN_UP, ACCOUNT, PASSWORD_FORGET ];
+const NavigationRoutes = [ HOME, SIGN_IN, SIGN_UP, ACCOUNT ];
 
 const Conatiner = Styled.div`
     display:flex;

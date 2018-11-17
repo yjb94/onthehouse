@@ -75,7 +75,9 @@ class SignUp extends React.Component {
                     />
                     <SubmitButton 
                         onClick={this.onSubmit}
-                    />
+                    >
+                        Sign Up
+                    </SubmitButton>
                 </Form>
             </Container>
         );
