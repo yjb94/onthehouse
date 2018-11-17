@@ -10,7 +10,7 @@ create-react-app / mobx / styled-component / Airbnb Style Guideline
 
 ### `Back-end`
 
-Firebase cloud functions(TypeScript) / firebase storage / firebase realtime database
+Firebase cloud functions(TypeScript, RESTful) / firebase storage / firebase realtime database
 
 ### list of things i've done
 
@@ -96,3 +96,6 @@ adding this is for firebase app controlling
 redirect widlcard(*) to /index.html
 
 it's because of server side routing conflicts with client side routing
+
+14. firebase functions to REST API
+[reference](https://itnext.io/building-a-serverless-restful-api-with-cloud-functions-firestore-and-express-f917a305d4e6)

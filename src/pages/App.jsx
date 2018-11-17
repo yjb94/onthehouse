@@ -55,7 +55,8 @@ class App extends React.Component {
         // log in(now, when session was maintained) /
         firebaseApp.auth().onAuthStateChanged((currentUser) => {
             //get user data
-            // console.log('auth state change', currentUser);
+            const { uid } = currentUser;
+            console.log(uid);
         });
     }
     componentWillReceiveProps(nextProps) {

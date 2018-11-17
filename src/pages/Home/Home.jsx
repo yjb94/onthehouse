@@ -29,7 +29,7 @@ let fakeData = [];
 function generateFakeData() {
     for(let i = 0; i < 40; i++) {
         fakeData.push({
-            image:`https://picsum.photos/300/400/?image=${Math.floor(Math.random()*1000)}`,
+            image:'',//`https://picsum.photos/300/400/?image=${Math.floor(Math.random()*1000)}`,
             title:faker.lorem.sentence(),
             description:faker.lorem.paragraph(),
             date:faker.date.past(),

@@ -3,10 +3,10 @@ import { firebaseApp } from '../module/firebase';
 import { observable, action } from 'mobx';
 
 class AuthStore {
-    @observable user = firebaseApp.auth().currentUser;
+    @observable user = undefined;
 
     handleFirebaseLogin = (result) => {
-        return result;
+        return result
     }
 
     handleFirebaseError = (error) => {
