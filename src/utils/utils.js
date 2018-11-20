@@ -17,3 +17,7 @@ export function getLocale() {
 export function setLocale(locale = 'auto') {
     localStorage.setItem('locale', locale);
 }
+
+export function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}

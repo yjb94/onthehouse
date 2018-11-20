@@ -5,4 +5,7 @@ export default {
     'Set Language': '언어 설정',
     'Korean': '한국어',
     'English': 'English',
+    'Posting': '포스팅',
+    'Detail': '상세 정보',
+    'Cart': '장바구니',
 }

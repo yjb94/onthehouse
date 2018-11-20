@@ -5,7 +5,7 @@ import { getEndpoint } from "../constants/general";
 import axios from 'axios';
 
 class AuthStore {
-    @observable user = undefined;
+    @observable user = JSON.parse(localStorage.getItem('me'));
 
     handleFirebaseLogin = (result) => {
         return result
@@ -38,6 +38,7 @@ class AuthStore {
         }
         axios.get(getEndpoint(`user/${uid}`)).then((res) => {
             this.user = res.data;
+            localStorage.setItem('me', JSON.stringify(res.data));
             return this.user;
         }).catch(_ => null);
     }

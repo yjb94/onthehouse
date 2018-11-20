@@ -99,3 +99,11 @@ it's because of server side routing conflicts with client side routing
 
 14. firebase functions to REST API
 [reference](https://itnext.io/building-a-serverless-restful-api-with-cloud-functions-firestore-and-express-f917a305d4e6)
+
+15. axios added for REST API control
+
+> yarn add axios
+
+16. localization added
+
+> yarn add react-intl

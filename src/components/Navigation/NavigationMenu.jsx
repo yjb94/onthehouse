@@ -1,10 +1,10 @@
 import React from 'react';
 import Styled from "styled-components";
 import { observer, inject } from 'mobx-react';
-import { ACCOUNT, SHOP } from '../../constants/routes';
+import { ACCOUNT, SHOP, BLOG } from '../../constants/routes';
 import NavigationItem from './NavigationItem';
 
-let NavigationRoutes = [ SHOP, ACCOUNT ];
+let NavigationRoutes = [ SHOP, BLOG, ACCOUNT ];
 
 const Conatiner = Styled.div`
     display:flex;

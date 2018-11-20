@@ -72,7 +72,6 @@ class App extends React.Component {
             this.props.history.push('/');
         }
     }
-
     componentDidMount = () => {
         window.addEventListener('scroll', this.scrollListener);
         window.addEventListener('resize', this.resizeListener);
@@ -117,6 +116,10 @@ class App extends React.Component {
                     <Route exact path={routes.SIGN_UP.route} component={pages.SignUp}/>
                     <Route exact path={routes.ACCOUNT.route} component={pages.Account}/>
                     <Route exact path={routes.SHOP.route}    component={pages.Shop}/>
+                    <Route exact path={routes.BLOG.route}    component={pages.Blog}/>
+                    <Route exact path={routes.POSTING.route} component={pages.Posting}/>
+                    <Route exact path={routes.DETAIL.route}  component={pages.Detail}/>
+                    <Route exact path={routes.CART.route}    component={pages.Cart}/>
                 </Contents>
 
                 <Footer/>

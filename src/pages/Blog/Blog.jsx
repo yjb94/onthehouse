@@ -4,8 +4,6 @@ import { observer, inject } from 'mobx-react';
 import faker from 'faker';
 import Card from '../../components/DataDisplay/Card';
 import Masonry from '../../components/DataDisplay/Masonry';
-import { withRouter } from "react-router-dom";
-import { DETAIL } from '../../constants/routes';
 
 const Container = Styled.header`
     display:flex;
@@ -32,8 +30,6 @@ function generateFakeData() {
             title:faker.lorem.sentence(),
             description:faker.lorem.paragraph(),
             date:faker.date.past(),
-            id:faker.random.uuid(),
-            price:faker.random.number(1000)
         })
     }
 }
@@ -42,15 +38,10 @@ generateFakeData();
 @inject(store => ({
 }))
 @observer
-class Shop extends React.Component {
-    onClickItem = (data) => {
-        const { history } = this.props;
-        history.push(`${DETAIL.route}?id=${data.id}`)
-    }
-
+class Blog extends React.Component {
     render() {
         let cardViews = fakeData.map((each, idx) => {
-            return <Card key={idx} onClick={this.onClickItem.bind(this, each)} {...each}/>
+            return <Card key={idx} {...each}/>
         })
 
         return (
@@ -61,7 +52,7 @@ class Shop extends React.Component {
     }
 }
 
-Shop.defaultProps = {
+Blog.defaultProps = {
 };
 
-export default withRouter(Shop);
+export default Blog;

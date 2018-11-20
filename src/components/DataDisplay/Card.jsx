@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Styled from "styled-components";
 import moment from 'moment';
+import { numberWithCommas } from '../../utils/utils';
 
 const propTypes = {
     title:PropTypes.string,
@@ -48,6 +49,11 @@ const Time = Styled.div`
     font-size: 0.7em;
     color:#999;
 `;
+const Price = Styled.div`
+    font-size: 0.7em;
+    color: #777;
+    margin-top: 20px;
+`;
 const Divider = Styled.div`
     width:20%;
     height:1px;
@@ -57,7 +63,7 @@ const Divider = Styled.div`
 
 export default class Card extends React.Component {
     render() {
-        const { onClick, title, image, date, description, containerStyle } = this.props;
+        const { onClick, title, image, date, price, description, containerStyle } = this.props;
         
         return (
             <Container onClick={onClick} style={{...containerStyle}}>
@@ -75,6 +81,11 @@ export default class Card extends React.Component {
                     <Description>
                         {description}
                     </Description>
+                    {price &&
+                        <Price>
+                            {`$${numberWithCommas(price)}`}
+                        </Price>
+                    }
                 </TextContainer>
             </Container>
         );
