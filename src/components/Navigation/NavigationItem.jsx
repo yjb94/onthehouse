@@ -4,8 +4,9 @@ import PropTypes from 'prop-types';
 import { observer, inject } from 'mobx-react';
 import { DEFAULT_ROUTE } from '../../constants/routes';
 import { withRouter } from "react-router-dom";
+import { injectIntl } from 'react-intl'
 
-const Conatiner = Styled.div`
+const Conatiner = Styled.button`
     position:flex;
 `;
 
@@ -21,11 +22,13 @@ class NavigationItem extends React.Component {
     }
 
     render() {
-        const { data } = this.props;
+        const { data, custom, children, intl } = this.props;
+
+        const name =  data.id ? intl.formatMessage({ id: data.id }) : data.name;
 
         return (
             <Conatiner onClick={this.onNav}>
-                {data.name}
+                {custom ? children : name}
             </Conatiner>
         );
     }
@@ -33,9 +36,11 @@ class NavigationItem extends React.Component {
 
 NavigationItem.propTypes = {
     data: PropTypes.object.isRequired,
+    custom: PropTypes.bool,
 };
 NavigationItem.defaultProps = {
-    data: DEFAULT_ROUTE
+    data: DEFAULT_ROUTE,
+    custom: false
 };
 
-export default withRouter(NavigationItem);
+export default injectIntl(withRouter(NavigationItem));

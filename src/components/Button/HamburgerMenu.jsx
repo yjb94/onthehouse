@@ -11,6 +11,7 @@ const Conatiner = Styled.button`
     transition: .5s ease-in-out;
     z-index:${zIndex.Hamburger}
     margin: 50px;
+    right: 0;
 
     span:nth-child(1) {
         transform: ${props => props.isOpen ? "rotate(45deg)" : "rotate(0deg)"};

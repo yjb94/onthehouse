@@ -44,26 +44,32 @@ const RootContainer = Styled.div`
 @inject(store => ({
     onScroll:store.scroll.onScroll,
     scrollOffset:store.scroll.isScrolled,
+
     headerHeight:store.screen.headerHeight,
+    isMobileSize:store.screen.isMobileSize,
     resize:store.screen.resize,
+
     user:store.auth.user,
+    getUser:store.auth.getUser,
+
     slider:store.slider
 }))
 class App extends React.Component {
     componentWillMount = () => {
         //this function is fired when user is -
-        // log in(now, when session was maintained) /
+        // log in(now, when session was maintained) / logout
         firebaseApp.auth().onAuthStateChanged((currentUser) => {
             //get user data
-            const { uid } = currentUser;
-            console.log(uid);
+            if(currentUser) {
+                this.props.getUser();
+            }
         });
     }
     componentWillReceiveProps(nextProps) {
-        if(nextProps.user) {
+        if(!this.props.user && nextProps.user) {
             // handle after login
-            // console.log('logged in');
-            // this.props.history.push('/');
+            // TODO redirection url change
+            this.props.history.push('/');
         }
     }
 
@@ -90,7 +96,7 @@ class App extends React.Component {
     }
 
     render() {
-        const { headerHeight } = this.props;
+        const { isMobileSize, headerHeight } = this.props;
 
         return (
             <RootContainer>
@@ -100,7 +106,7 @@ class App extends React.Component {
                     <NavigationMenu/>
                 </Slider>
 
-                <HamburgerMenu/>
+                {isMobileSize && <HamburgerMenu/>}
 
                 <Header/>
 
@@ -109,6 +115,8 @@ class App extends React.Component {
                     <Route exact path={routes.HOME.route}    component={pages.Home}/>
                     <Route exact path={routes.SIGN_IN.route} component={pages.SignIn}/>
                     <Route exact path={routes.SIGN_UP.route} component={pages.SignUp}/>
+                    <Route exact path={routes.ACCOUNT.route} component={pages.Account}/>
+                    <Route exact path={routes.SHOP.route}    component={pages.Shop}/>
                 </Contents>
 
                 <Footer/>
@@ -118,6 +126,6 @@ class App extends React.Component {
 }
 
  App.propTypes = propTypes;
- App.defaultProps = defaultProps;
+    App.defaultProps = defaultProps;
 
- export default App;
+    export default App;

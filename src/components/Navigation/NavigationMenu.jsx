@@ -1,33 +1,34 @@
 import React from 'react';
 import Styled from "styled-components";
 import { observer, inject } from 'mobx-react';
-import { HOME, SIGN_IN, SIGN_UP, ACCOUNT } from '../../constants/routes';
+import { ACCOUNT, SHOP } from '../../constants/routes';
 import NavigationItem from './NavigationItem';
 
-const NavigationRoutes = [ HOME, SIGN_IN, SIGN_UP, ACCOUNT ];
+let NavigationRoutes = [ SHOP, ACCOUNT ];
 
 const Conatiner = Styled.div`
     display:flex;
-    flex-direction: column;
+    flex-direction: ${props => props.isMobile ? 'column' : 'row'};
     padding-top:${props => props.top}px;
 `;
 
 @inject(store => ({
     slider:store.slider,
     headerHeight:store.screen.headerHeight,
+    isMobileSize:store.screen.isMobileSize
 }))
 @observer
 class NavigationMenu extends React.Component {
 
     render() {
-        const { headerHeight } = this.props;
+        const { headerHeight, isMobileSize } = this.props;
 
         const itemsView = NavigationRoutes.map((each, idx) => {
             return <NavigationItem key={idx} data={each}/>
         })
 
         return (
-            <Conatiner top={headerHeight}>
+            <Conatiner top={isMobileSize ? headerHeight : 0} isMobile={isMobileSize}>
                 {itemsView}
             </Conatiner>
         );

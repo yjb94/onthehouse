@@ -7,6 +7,7 @@ import * as express from 'express';
 import * as bodyParser from "body-parser";
 
 admin.initializeApp(functions.config().firebase);
+const cors = require('cors')({ origin:true });
 
 const db = admin.database();
 
@@ -39,20 +40,22 @@ const sendError = (res, error:String): void => {
 }
 
 app.get('/user/:uid', (req, res) => {
-    const uid = req.params.uid.toString();
-    if(!uid) {
-        sendError(res, 'No Uid found');
-    }
-    
-    return db.ref(`users/${uid}`).once('value').then(snap => {
-        const user = snap.val();
-        if (user) {
-            delete user['created_at'];
-            res.send(user);
-        } else {
-            sendError(res, 'User not found');
+    cors(req, res, () => {
+        const uid = req.params.uid.toString();
+        if(!uid) {
+            sendError(res, 'No Uid found');
         }
-    }).catch((error) => {
-        sendError(res, error.toString());
-    });
+        
+        return db.ref(`users/${uid}`).once('value').then(snap => {
+            const user = snap.val();
+            if (user) {
+                delete user['created_at'];
+                res.send(user);
+            } else {
+                sendError(res, 'User not found');
+            }
+        }).catch((error) => {
+            sendError(res, error.toString());
+        });
+    })
 })

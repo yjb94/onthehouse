@@ -3,6 +3,10 @@ import Styled from "styled-components";
 import LinkIcon from '../components/Button/LinkIcon';
 import instagram from '@fortawesome/fontawesome-free-brands/faInstagram'
 import { observer, inject } from 'mobx-react';
+import NavigationMenu from '../components/Navigation/NavigationMenu';
+import NavigationItem from '../components/Navigation/NavigationItem';
+import { SIGN_IN, HOME } from '../constants/routes';
+import { FormattedMessage } from 'react-intl';
 
 const Container = Styled.header`
     display:flex;
@@ -20,23 +24,24 @@ const LeftContainer = Styled.div`
     display:flex;
     align-items:center;
     justify-content:flex-start;
-    flex: 1;
+
+    font-size: 30px;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
 `;
 const MiddleContainer = Styled.div`
     display:flex;
     align-items:center;
     justify-content:center;
-
-    font-size: 30px;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
-    /* flex: 1; */
+    flex: 1;
 `;
 const RightContainer = Styled.div`
     display:flex;
     align-items:center;
     justify-content:flex-end;
     flex: 1;
+`;
+const LogoutButton = Styled.button`
 `;
 const IconContainer = Styled.div`
     margin-left: 8px;
@@ -49,6 +54,8 @@ const IconContainer = Styled.div`
 @inject(store => ({
     isMobileSize:store.screen.isMobileSize,
     setHeaderHeight:store.screen.setHeaderHeight,
+    user:store.auth.user,
+    logout:store.auth.logout,
 }))
 @observer
 class Header extends React.Component {
@@ -57,6 +64,25 @@ class Header extends React.Component {
         setHeaderHeight();
     }
     
+    handleLogout = () => {
+        this.props.logout();
+    }
+
+    renderAuthMenu() {
+        const { user } = this.props;
+
+        if(user) {
+            return (
+                <LogoutButton onClick={this.handleLogout}>
+                    <FormattedMessage id="Logout"/>
+                </LogoutButton>
+            )
+        } else {
+            return (
+                <NavigationItem data={SIGN_IN}/>
+            )
+        }
+    }
 
     render() {
         const { isMobileSize } = this.props;
@@ -64,26 +90,30 @@ class Header extends React.Component {
         return (
             <Container id="header">
                 <LeftContainer>
+                    <NavigationItem data={HOME} custom={true}>
+                        ON THE HOUSE
+                    </NavigationItem>
                 </LeftContainer>
-                <MiddleContainer>
-                    ON THE HOUSE
-                </MiddleContainer>
-                {!isMobileSize &&
-                    <RightContainer>
-                        <IconContainer color="#333">
-                            <LinkIcon 
-                                link="https://www.instagram.com/songsong.yo/"
-                                icon={instagram}
-                            />
-                        </IconContainer>
-                        <IconContainer color="#333">
-                            <LinkIcon 
-                                link="http://blog.naver.com/onthehouse_"
-                                iconName={"square"}
-                            />
-                        </IconContainer>
-                    </RightContainer>
+                {!isMobileSize && 
+                    <MiddleContainer>
+                        <NavigationMenu/>
+                    </MiddleContainer>
                 }
+                <RightContainer>
+                    {!isMobileSize && this.renderAuthMenu()}
+                    {/* <IconContainer color="#333">
+                        <LinkIcon 
+                            link="https://www.instagram.com/songsong.yo/"
+                            icon={instagram}
+                        />
+                    </IconContainer>
+                    <IconContainer color="#333">
+                        <LinkIcon 
+                            link="http://blog.naver.com/onthehouse_"
+                            iconName={"square"}
+                        />
+                    </IconContainer> */}
+                </RightContainer>
             </Container>
         );
     }

@@ -6,3 +6,14 @@ export function getHeaderHeight() {
 export function capitalizeFirst(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
+export function getLocale() {
+    let locale = localStorage.getItem('locale');
+    if(!locale || locale === 'auto') {
+        locale = navigator.language || navigator.userLanguage || 'auto'
+    }
+    return locale;
+}
+export function setLocale(locale = 'auto') {
+    localStorage.setItem('locale', locale);
+}
