@@ -4,8 +4,10 @@ export function getBaseUri () {
 export function getEndpoint(route) {
     return `${getBaseUri()}/${route}`;
 }
+  
 export function getConfig() {
+    const idToken = localStorage.getItem('idToken');
     return {
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 'Content-Type': 'application/json', 'Authorization':idToken }
     }
 }

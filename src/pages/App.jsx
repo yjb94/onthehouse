@@ -62,8 +62,7 @@ class App extends React.Component {
         firebaseApp.auth().onAuthStateChanged((currentUser) => {
             //get user data
             if(currentUser) {
-                // this.props.getUser();
-                // this.props.setUser(currentUser.uid, { role:"test" });
+                this.props.getUser();
             }
         });
     }

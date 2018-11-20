@@ -3,6 +3,7 @@ import { firebaseApp } from '../module/firebase';
 import { observable, action } from 'mobx';
 import { getEndpoint, getConfig } from "../constants/general";
 import axios from 'axios';
+import { getIdToken } from "../utils/utils";
 
 class AuthStore {
     @observable user = JSON.parse(localStorage.getItem('me'));
@@ -28,6 +29,8 @@ class AuthStore {
     }
     @action logout = () => {
         this.user = null;
+        localStorage.removeItem('me');
+        localStorage.removeItem('idToken');
         return firebaseApp.auth().signOut()
             .catch(this.handleFirebaseError);
     }
@@ -37,12 +40,21 @@ class AuthStore {
             const currentUser = firebase.auth().currentUser;
             uid = currentUser.uid || '';
         }
-        axios.get(getEndpoint(`user/${uid}`)).then((res) => {
-            res.data.id = uid;
-            this.user = res.data;
-            localStorage.setItem('me', JSON.stringify(res.data));
-            return this.user;
-        }).catch(_ => null);
+
+        const loadUserData = () => {
+            axios.get(getEndpoint(`user/${uid}`)).then((res) => {
+                res.data.id = uid;
+                this.user = res.data;
+                localStorage.setItem('me', JSON.stringify(res.data));
+                return this.user;
+            }).catch(_ => null);
+        }
+
+        if(!localStorage.getItem('idToken')) {
+            getIdToken().then(loadUserData);
+        } else {
+            loadUserData()
+        }
     }
 
     @action setUser = (uid, attr) => {

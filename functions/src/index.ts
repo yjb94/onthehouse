@@ -15,8 +15,7 @@ const app = express();
 const main = express();
 
 app.use(cors({ origin: true }));
-main.use('/api/v1', app);;
-main.use(cors({ origin: true }));
+main.use('/api/v1', app);
 main.use(bodyParser.json());
 main.use(bodyParser.urlencoded({ extended: false }));
 export const webApi = functions.https.onRequest(main);
@@ -38,6 +37,10 @@ exports.onCreateUser = functions.auth.user().onCreate((user) => {
 const sendError = (res, error:String): void => {
     console.error(error);
     res.sendStatus(404);
+}
+const verify = (req, res) => {
+    const idToken = req.get('Authorization');
+    return admin.auth().verifyIdToken(idToken).catch((error) => sendError(res, error));
 }
 
 app.get('/user/:uid', (req, res) => {
@@ -61,19 +64,21 @@ app.get('/user/:uid', (req, res) => {
 })
 
 app.post('/user/:uid', (req, res) => {
-    const uid = req.params.uid.toString();
-    const attr = req.body.attr;
-    console.log(`PUT /user/${uid}`);
-    if(!uid) {
-        sendError(res, 'No Uid found');
-    }
-    if(!attr || Object.keys(attr).length === 0) {
-        sendError(res, 'No attributes to update');
-    }
-
-    const dbRef = db.ref(`/users/${uid}`);
-    console.log(`/users/${uid} update - ${attr}`);
-    dbRef.update(attr)
-        .then(result => res.send(result))
-        .catch(error => sendError(res, error));
+    verify(req, res).then(() => {
+        const uid = req.params.uid.toString();
+        const attr = req.body.attr;
+        console.log(`PUT /user/${uid}`);
+        if(!uid) {
+            sendError(res, 'No Uid found');
+        }
+        if(!attr || Object.keys(attr).length === 0) {
+            sendError(res, 'No attributes to update');
+        }
+    
+        const dbRef = db.ref(`/users/${uid}`);
+        console.log(`/users/${uid} update - ${JSON.stringify(attr)}`);
+        dbRef.update(attr)
+            .then(result => res.send(result))
+            .catch(error => sendError(res, error));
+    });
 })

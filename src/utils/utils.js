@@ -1,3 +1,6 @@
+import * as firebase from "firebase";
+
+
 export function getHeaderHeight() {
     const header = document.getElementById('header');
     return header ? header.clientHeight : 0;
@@ -20,4 +23,10 @@ export function setLocale(locale = 'auto') {
 
 export function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+export function getIdToken() {
+    return firebase.auth().currentUser.getIdToken(/* forceRefresh */ false).then(function(idToken) {
+        localStorage.setItem('idToken', idToken)
+    }).catch(console.error);
 }

@@ -1,1 +1,2 @@
-firebase deploy only functions:webApi
+firebase deploy --only functions:webApi
+
