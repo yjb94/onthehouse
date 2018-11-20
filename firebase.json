@@ -24,11 +24,17 @@
       "**/node_modules/**"
     ], 
     "headers": [{
-        "source": "**",
-        "headers" : [{
-          "key" : "Access-Control-Allow-Origin",
-          "value" : "*"
-        }]
+      "source": "**",
+      "headers" : [{
+        "key" : "Access-Control-Allow-Origin",
+        "value" : "*"
+      }]
+    },{
+      "source": "/api/v1/**",
+      "headers" : [{
+        "key" : "Access-Control-Allow-Origin",
+        "value" : "*"
+      }]
     }]
   }
 }

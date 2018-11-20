@@ -51,6 +51,7 @@ const RootContainer = Styled.div`
 
     user:store.auth.user,
     getUser:store.auth.getUser,
+    setUser:store.auth.setUser,
 
     slider:store.slider
 }))
@@ -61,7 +62,8 @@ class App extends React.Component {
         firebaseApp.auth().onAuthStateChanged((currentUser) => {
             //get user data
             if(currentUser) {
-                this.props.getUser();
+                // this.props.getUser();
+                // this.props.setUser(currentUser.uid, { role:"test" });
             }
         });
     }
