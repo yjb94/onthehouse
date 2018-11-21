@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Styled from "styled-components";
+import styled from "styled-components";
 
 const propTypes = {
     views:PropTypes.array.isRequired,
@@ -10,7 +10,7 @@ const defaultProps = {
     views:[]
 };
 
-const Container = Styled.div`
+const Container = styled.div`
     width: 100%;
     display:grid;
     grid-gap: 50px 30px;

@@ -1,9 +1,9 @@
 import React from 'react';
-import Styled from "styled-components";
+import styled from "styled-components";
 import { observer, inject } from 'mobx-react';
 import zIndex from '../../constants/zIndex';
 
-const Conatiner = Styled.button`
+const Conatiner = styled.button`
     width: 30px;
     height: 20px;
     position: fixed;
@@ -30,7 +30,7 @@ const Conatiner = Styled.button`
         transform-origin: left center;
     }
 `;
-const Line = Styled.span`
+const Line = styled.span`
     display: block;
     position: absolute;
     height: 2px;

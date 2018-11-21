@@ -1,19 +1,30 @@
 import React from 'react';
-import Styled from "styled-components";
+import styled from "styled-components";
 import { observer, inject } from 'mobx-react';
 import Input from '../../components/DataEntry/Input';
 import { InputID } from '../../constants/ID';
-import { FormattedMessage } from 'react-intl';
+import { injectIntl, FormattedMessage } from 'react-intl';
+import StateButton, { ButtonState } from '../../components/Button/StateButton';
 
-const Container = Styled.header`
+const Container = styled.div`
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-top: 50px;
 `;
-const Form = Styled.form`
+const Form = styled.form`
     display:flex;
     flex-direction:column;
+    width:300px;
+    height: 300px;
+    justify-content: center;
+    align-items: center;
+    padding:25px;
+    box-shadow: 0 2px 50px 0 rgba(0, 0, 0, 0.2);
 `;
-const SignInButton = Styled.button`
+const SignInButton = styled.button`
 `;
-const ForgotPassword = Styled.button`
+const ForgotPassword = styled.button`
 `;
 
 @inject(store => ({
@@ -54,6 +65,7 @@ class SignIn extends React.Component {
             return true;
     }
     render() {
+        const { intl, auth } = this.props;
         const { email, password } =  this.state;
 
         return (
@@ -63,15 +75,19 @@ class SignIn extends React.Component {
                         id={InputID.email} 
                         value={email} 
                         onChange={this.onInputChange}
+                        type={'email'}
+                        label={intl.formatMessage({ id: 'Email' })}
                     />
                     <Input 
                         id={InputID.password} 
                         value={password} 
                         onChange={this.onInputChange}
+                        type={'password'}
+                        label={intl.formatMessage({ id: 'Password' })}
                     />
-                    <SignInButton onClick={this.onSubmit}>
+                    <StateButton onClick={this.onSubmit} buttonState={auth.isFetching ? ButtonState.loading : ButtonState.idle}>
                         <FormattedMessage id="Sign In"/>
-                    </SignInButton>
+                    </StateButton>
                 </Form>
                 <ForgotPassword/>
             </Container>
@@ -82,4 +98,4 @@ class SignIn extends React.Component {
 SignIn.defaultProps = {
 };
 
-export default SignIn;
+export default injectIntl(SignIn);

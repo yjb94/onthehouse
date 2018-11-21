@@ -1,5 +1,5 @@
 import React from 'react';
-import Styled from "styled-components";
+import styled from "styled-components";
 import LinkIcon from '../components/Button/LinkIcon';
 import instagram from '@fortawesome/fontawesome-free-brands/faInstagram'
 import { observer, inject } from 'mobx-react';
@@ -8,7 +8,7 @@ import NavigationItem from '../components/Navigation/NavigationItem';
 import { SIGN_IN, HOME } from '../constants/routes';
 import { FormattedMessage } from 'react-intl';
 
-const Container = Styled.header`
+const Container = styled.header`
     display:flex;
     flex-direction:row;
     align-items:center;
@@ -20,7 +20,7 @@ const Container = Styled.header`
     background-color:white;
     position: fixed;
 `;
-const LeftContainer = Styled.div`
+const LeftContainer = styled.div`
     display:flex;
     align-items:center;
     justify-content:flex-start;
@@ -29,21 +29,21 @@ const LeftContainer = Styled.div`
     border-top: 1px solid black;
     border-bottom: 1px solid black;
 `;
-const MiddleContainer = Styled.div`
+const MiddleContainer = styled.div`
     display:flex;
     align-items:center;
     justify-content:center;
     flex: 1;
 `;
-const RightContainer = Styled.div`
+const RightContainer = styled.div`
     display:flex;
     align-items:center;
     justify-content:flex-end;
     flex: 1;
 `;
-const LogoutButton = Styled.button`
+const LogoutButton = styled.button`
 `;
-const IconContainer = Styled.div`
+const IconContainer = styled.div`
     margin-left: 8px;
     background:${props => props.background || 'transparent'};
     color:${props => props.color || 'transparent'};

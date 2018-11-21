@@ -1,8 +1,8 @@
 import React from 'react';
-import Styled from "styled-components";
+import styled from "styled-components";
 import { observer, inject } from 'mobx-react';
 
-const Container = Styled.header`
+const Container = styled.header`
     display:flex;
 `;
 

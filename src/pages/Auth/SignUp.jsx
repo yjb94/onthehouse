@@ -1,17 +1,17 @@
 import React from 'react';
-import Styled from "styled-components";
+import styled from "styled-components";
 import { observer, inject } from 'mobx-react';
 import Input from "../../components/DataEntry/Input";
 import { InputID } from '../../constants/ID';
 import { FormattedMessage } from 'react-intl';
 
-const Container = Styled.header`
+const Container = styled.header`
 `;
-const Form = Styled.form`
+const Form = styled.form`
     display:flex;
     flex-direction:column;
 `;
-const SubmitButton = Styled.button`
+const SubmitButton = styled.button`
 `;
 
 @inject(store => ({

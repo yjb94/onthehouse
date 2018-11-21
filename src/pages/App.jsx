@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
-import Styled, { createGlobalStyle } from "styled-components";
+import styled from "styled-components";
 import { Route } from 'react-router-dom';
 import { inject } from 'mobx-react';
 import * as routes from '../constants/routes';
@@ -11,33 +11,17 @@ import Slider from '../components/Feedback/Slider';
 import HamburgerMenu from '../components/Button/HamburgerMenu';
 import NavigationMenu from '../components/Navigation/NavigationMenu';
 import { UserType } from '../constants/ID';
+import { GlobalStyle } from '../constants/globalStyles';
 
 const propTypes = {};
 
 const defaultProps = {};
 
-const Contents = Styled.div`
+const Contents = styled.div`
     padding-top:${props => props.top}px;
 `;
 
-const GlobalStyle = createGlobalStyle`
-    body {
-        margin: 0;
-    }
-    button {
-        padding: 0;
-        border: none;
-        font: inherit;
-        color: inherit;
-        background-color: transparent;
-        cursor: pointer;
-    }
-    button:focus {
-        outline: none;
-    }
-`
-
-const RootContainer = Styled.div`
+const RootContainer = styled.div`
     width: -webkit-fill-available;
     height: -webkit-fill-available;
 `;
@@ -54,7 +38,9 @@ const RootContainer = Styled.div`
     getUser:store.auth.getUser,
     setUser:store.auth.setUser,
 
-    slider:store.slider
+    slider:store.slider,
+
+    route:store.route
 }))
 class App extends React.Component {
     componentWillMount = () => {
@@ -78,10 +64,18 @@ class App extends React.Component {
         window.addEventListener('scroll', this.scrollListener);
         window.addEventListener('resize', this.resizeListener);
         this.scrollListener();
+
+        const { history } = this.props;
+        history.listen(this.onRouteChange);
     }
     componentWillUnmount = () => {
         window.removeEventListener('scroll', this.scrollListener);
         window.removeEventListener('resize', this.resizeListener);
+    }
+
+    onRouteChange = (location, action) => {
+        const { route } = this.props;
+        route.onRouteChange(location, action)
     }
     
     resizeListener = () => {
@@ -142,7 +136,7 @@ class App extends React.Component {
     }
 }
 
- App.propTypes = propTypes;
-    App.defaultProps = defaultProps;
+App.propTypes = propTypes;
+App.defaultProps = defaultProps;
 
-    export default App;
+export default App;

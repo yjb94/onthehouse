@@ -1,12 +1,12 @@
 import React from 'react';
-import Styled from "styled-components";
+import styled from "styled-components";
 import PropTypes from 'prop-types';
 import { observer, inject } from 'mobx-react';
 import { DEFAULT_ROUTE } from '../../constants/routes';
 import { withRouter } from "react-router-dom";
 import { injectIntl } from 'react-intl'
 
-const Conatiner = Styled.button`
+const Conatiner = styled.button`
     position:flex;
 `;
 

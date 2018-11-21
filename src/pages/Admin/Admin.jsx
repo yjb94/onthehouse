@@ -1,11 +1,12 @@
 import React from 'react';
-import Styled from "styled-components";
+import styled from "styled-components";
 import { observer, inject } from 'mobx-react';
 import NavigationItem from '../../components/Navigation/NavigationItem';
 import { ADMIN_PRODUCT } from '../../constants/routes';
 
-const Container = Styled.div`
+const Container = styled.div`
     display:flex;
+    flex-direction:column;
 `;
 
 @inject(store => ({

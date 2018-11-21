@@ -1,11 +1,11 @@
 import React from 'react';
-import Styled from "styled-components";
+import styled from "styled-components";
 import { observer, inject } from 'mobx-react';
 import faker from 'faker';
 import Card from '../../components/DataDisplay/Card';
 import Masonry from '../../components/DataDisplay/Masonry';
 
-const Container = Styled.header`
+const Container = styled.header`
     display:flex;
     overflow: hidden;
     padding: 0px 100px;

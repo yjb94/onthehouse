@@ -1,6 +1,8 @@
 export default {
     'Sign In': '로그인',
     'Sign Up': '회원가입',
+    'Email': '이메일',
+    'Password': '비밀번호',
     'Logout': '로그아웃',
     'Set Language': '언어 설정',
     'Korean': '한국어',

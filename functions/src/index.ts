@@ -20,6 +20,21 @@ main.use(bodyParser.json());
 main.use(bodyParser.urlencoded({ extended: false }));
 export const webApi = functions.https.onRequest(main);
 
+
+// general
+
+
+const sendError = (res, error:String): void => {
+    console.error(error);
+    res.sendStatus(404);
+}
+const verify = (req, res) => {
+    const idToken = req.get('Authorization');
+    return admin.auth().verifyIdToken(idToken).catch((error) => sendError(res, error));
+}
+
+//user
+
 // creates default element for initial user
 exports.onCreateUser = functions.auth.user().onCreate((user) => {
     const { uid, email, emailVerified } = user;
@@ -33,18 +48,6 @@ exports.onCreateUser = functions.auth.user().onCreate((user) => {
         .then()
         .catch(error => console.error(error));
 });
-
-const sendError = (res, error:String): void => {
-    console.error(error);
-    res.sendStatus(404);
-}
-const verify = (req, res) => {
-    const idToken = req.get('Authorization');
-    return admin.auth().verifyIdToken(idToken).catch((error) => sendError(res, error));
-}
-
-
-//user
 
 
 app.get('/user/:uid', (req, res) => {

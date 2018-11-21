@@ -1,5 +1,5 @@
 import React from 'react';
-import Styled from "styled-components";
+import styled from "styled-components";
 import { FormattedMessage } from 'react-intl';
 import LocaleItem from '../components/Global/LocaleItem';
 
@@ -7,7 +7,7 @@ const propTypes = {};
 
 const defaultProps = {};
 
-const Container = Styled.footer`
+const Container = styled.footer`
     background-color: #ddd;
     padding: 100px 50px;
     display: flex;
@@ -17,7 +17,7 @@ const Container = Styled.footer`
     color:#999;
     margin-top: 120px;
 `;
-const LanguageContainer = Styled.div`
+const LanguageContainer = styled.div`
 `;
 
 export default class Footer extends React.Component {

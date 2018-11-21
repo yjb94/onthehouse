@@ -1,9 +1,9 @@
 import React from 'react';
-import Styled from "styled-components";
+import styled from "styled-components";
 import { observer, inject } from 'mobx-react';
 import zIndex from '../../constants/zIndex';
 
-const Conatiner = Styled.div`
+const Conatiner = styled.div`
     position:fixed;
     width:100%;
     height:100%;
@@ -12,7 +12,7 @@ const Conatiner = Styled.div`
     pointer-events: ${props => props.isOpen ? 'auto' : 'none'};
     transition: .3s;
 `;
-const InnerContainer = Styled.div`
+const InnerContainer = styled.div`
     background-color:#fafafa;
     height:100%;
     width: 300px;

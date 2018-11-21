@@ -1,5 +1,5 @@
 import React from 'react';
-import Styled from "styled-components";
+import styled from "styled-components";
 import { FormattedMessage } from 'react-intl';
 import { getLocale, setLocale } from '../../utils/utils';
 import PropTypes from 'prop-types';
@@ -15,7 +15,7 @@ const defaultProps = {
     localeTo:getLocale()
 };
 
-const Container = Styled.button`
+const Container = styled.button`
 `;
 
 class LocaleItem extends React.Component {

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Styled from "styled-components";
+import styled from "styled-components";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { addIcon } from '../../module/fontawesome';
 
@@ -30,7 +30,7 @@ const defaultProps = {
     containerStyle:{}
 };
 
-const Container = Styled.button`
+const Container = styled.button`
     display:flex;
     flex-direction:row;
     align-items:center;

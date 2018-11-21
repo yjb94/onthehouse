@@ -30,3 +30,32 @@ export function getIdToken() {
         localStorage.setItem('idToken', idToken)
     }).catch(console.error);
 }
+
+export function getFileExt(name) {
+    return name.split('.').pop();
+}
+
+export function dataURItoFile(name, dataURI) {
+    var byteString = atob(dataURI.split(',')[1]);
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+    var ab = new ArrayBuffer(byteString.length);
+    var ia = new Uint8Array(ab);
+    for (var i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+    }
+    
+    var blob = new Blob([ab], {type: mimeString});
+    var file = new File([blob], name, {type: mimeString, lastModified: Date.now()});
+
+    return file
+}
+
+export function uploadImage(file, id) {// Create a root reference
+    var storageRef = firebase.storage().ref();
+    if(!id) {
+        id = 'image-' + Math.random().toString(36).substr(2, 16);
+    }
+    var ref = storageRef.child(`images/${id}.${getFileExt(file.name)}`);
+    return ref.put(file).then(snapshot => snapshot.ref.getDownloadURL()).catch(console.error);
+}

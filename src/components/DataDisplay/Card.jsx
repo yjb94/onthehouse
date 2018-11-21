@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Styled from "styled-components";
+import styled from "styled-components";
 import moment from 'moment';
 import { numberWithCommas } from '../../utils/utils';
 
@@ -17,14 +17,14 @@ const defaultProps = {
     containerStyle:{}
 };
 
-const Container = Styled.div`
+const Container = styled.div`
     display:flex;
     flex-direction:column;
     align-items:center;
     min-height: 400px;
     font-size: 18px;
 `;
-const Image = Styled.div`
+const Image = styled.div`
     overflow:hidden;
     background-position: center center;
     background-repeat: no-repeat;
@@ -32,29 +32,29 @@ const Image = Styled.div`
     width: 100%;
     height: 300px;
 `;
-const TextContainer = Styled.div`
+const TextContainer = styled.div`
     text-align:center;
     padding: 20px;
 `;
-const Title = Styled.div`
+const Title = styled.div`
     font-weight:700;
     font-size: 1em;
     color:#444;
 `;
-const Description = Styled.div`
+const Description = styled.div`
     font-size: 0.8em;
     color:#777;
 `;
-const Time = Styled.div`
+const Time = styled.div`
     font-size: 0.7em;
     color:#999;
 `;
-const Price = Styled.div`
+const Price = styled.div`
     font-size: 0.7em;
     color: #777;
     margin-top: 20px;
 `;
-const Divider = Styled.div`
+const Divider = styled.div`
     width:20%;
     height:1px;
     background-color:black;

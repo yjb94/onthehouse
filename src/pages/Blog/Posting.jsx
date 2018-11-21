@@ -1,11 +1,11 @@
 import React from 'react';
-import Styled from "styled-components";
+import styled from "styled-components";
 
 const propTypes = {};
 
 const defaultProps = {};
 
-const Container = Styled.div`
+const Container = styled.div`
 `;
 
 export default class Posting extends React.Component {

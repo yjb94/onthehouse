@@ -1,5 +1,5 @@
 import React from 'react';
-import Styled from "styled-components";
+import styled from "styled-components";
 import { observer, inject } from 'mobx-react';
 import { ACCOUNT, SHOP, BLOG, ADMIN } from '../../constants/routes';
 import NavigationItem from './NavigationItem';
@@ -8,7 +8,7 @@ import { UserType } from '../../constants/ID';
 const NavigationRoutes = [ SHOP, BLOG, ACCOUNT ];
 const NavigationAdminRoutes = [ SHOP, BLOG, ACCOUNT, ADMIN ];
 
-const Conatiner = Styled.div`
+const Conatiner = styled.div`
     display:flex;
     flex-direction: ${props => props.isMobile ? 'column' : 'row'};
     padding-top:${props => props.top}px;
