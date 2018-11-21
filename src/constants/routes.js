@@ -15,3 +15,6 @@ export const SIGN_UP = { route:'/signup', id: 'Sign Up' };
 export const SIGN_IN = { route:'/signin', id:'Sign In' };
 export const ACCOUNT = { route:'/account', name:'Account' };
 export const PASSWORD_FORGET = { route:'/forgot', name:'Password Forget' };
+
+export const ADMIN = { route:'/admin', name:'Admin' };
+export const ADMIN_PRODUCT = { route:'/admin/product', name:'Product' };

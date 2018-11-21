@@ -26,7 +26,7 @@ export function numberWithCommas(x) {
 }
 
 export function getIdToken() {
-    return firebase.auth().currentUser.getIdToken(/* forceRefresh */ false).then(function(idToken) {
+    return firebase.auth().currentUser.getIdToken(/* forceRefresh */ true).then(function(idToken) {
         localStorage.setItem('idToken', idToken)
     }).catch(console.error);
 }

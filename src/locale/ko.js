@@ -8,4 +8,5 @@ export default {
     'Posting': '포스팅',
     'Detail': '상세 정보',
     'Cart': '장바구니',
+    'Create': '만들기'
 }

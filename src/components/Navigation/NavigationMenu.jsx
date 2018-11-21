@@ -1,10 +1,12 @@
 import React from 'react';
 import Styled from "styled-components";
 import { observer, inject } from 'mobx-react';
-import { ACCOUNT, SHOP, BLOG } from '../../constants/routes';
+import { ACCOUNT, SHOP, BLOG, ADMIN } from '../../constants/routes';
 import NavigationItem from './NavigationItem';
+import { UserType } from '../../constants/ID';
 
-let NavigationRoutes = [ SHOP, BLOG, ACCOUNT ];
+const NavigationRoutes = [ SHOP, BLOG, ACCOUNT ];
+const NavigationAdminRoutes = [ SHOP, BLOG, ACCOUNT, ADMIN ];
 
 const Conatiner = Styled.div`
     display:flex;
@@ -14,16 +16,20 @@ const Conatiner = Styled.div`
 
 @inject(store => ({
     slider:store.slider,
+    user:store.auth.user,
     headerHeight:store.screen.headerHeight,
     isMobileSize:store.screen.isMobileSize
 }))
 @observer
 class NavigationMenu extends React.Component {
-
     render() {
-        const { headerHeight, isMobileSize } = this.props;
+        const { headerHeight, isMobileSize, user } = this.props;
+        let routes = NavigationRoutes;
+        if(user && user.role === UserType.admin) {
+            routes = NavigationAdminRoutes;
+        }
 
-        const itemsView = NavigationRoutes.map((each, idx) => {
+        const itemsView = routes.map((each, idx) => {
             return <NavigationItem key={idx} data={each}/>
         })
 

@@ -1,13 +1,12 @@
 import React from 'react';
 import Styled from "styled-components";
 import { observer, inject } from 'mobx-react';
-import faker from 'faker';
 import Card from '../../components/DataDisplay/Card';
 import Masonry from '../../components/DataDisplay/Masonry';
 import { withRouter } from "react-router-dom";
 import { DETAIL } from '../../constants/routes';
 
-const Container = Styled.header`
+const Container = Styled.div`
     display:flex;
     overflow: hidden;
     padding: 0px 100px;
@@ -23,33 +22,34 @@ const Container = Styled.header`
     }
 `;
 
-let fakeData = [];
-
-function generateFakeData() {
-    for(let i = 0; i < 40; i++) {
-        fakeData.push({
-            image:'',//`https://picsum.photos/300/400/?image=${Math.floor(Math.random()*1000)}`,
-            title:faker.lorem.sentence(),
-            description:faker.lorem.paragraph(),
-            date:faker.date.past(),
-            id:faker.random.uuid(),
-            price:faker.random.number(1000)
-        })
-    }
-}
-generateFakeData();
-
 @inject(store => ({
+    products:store.product.products,
+    loadProducts:store.product.load,
+    shouldLoad:store.scroll.shouldLoad
 }))
 @observer
 class Shop extends React.Component {
+    componentWillReceiveProps(nextProps) {
+        const { shouldLoad } = this.props;
+        if(nextProps.shouldLoad && !shouldLoad) {
+            this.load();
+        }
+    }
+
     onClickItem = (data) => {
         const { history } = this.props;
         history.push(`${DETAIL.route}?id=${data.id}`)
     }
 
+    load = () => {
+        const { loadProducts } = this.props;
+        loadProducts();
+    }
+
     render() {
-        let cardViews = fakeData.map((each, idx) => {
+        const { products } = this.props;
+
+        let cardViews = products.map((each, idx) => {
             return <Card key={idx} onClick={this.onClickItem.bind(this, each)} {...each}/>
         })
 

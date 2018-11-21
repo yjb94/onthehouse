@@ -107,3 +107,5 @@ it's because of server side routing conflicts with client side routing
 16. localization added
 
 > yarn add react-intl
+
+17. added Authorization for request using firebase idtoken

@@ -43,6 +43,10 @@ const verify = (req, res) => {
     return admin.auth().verifyIdToken(idToken).catch((error) => sendError(res, error));
 }
 
+
+//user
+
+
 app.get('/user/:uid', (req, res) => {
     const uid = req.params.uid.toString();
     console.log(`GET /user/${uid}`);
@@ -67,7 +71,7 @@ app.post('/user/:uid', (req, res) => {
     verify(req, res).then(() => {
         const uid = req.params.uid.toString();
         const attr = req.body.attr;
-        console.log(`PUT /user/${uid}`);
+        console.log(`POST /user/${uid}`);
         if(!uid) {
             sendError(res, 'No Uid found');
         }
@@ -82,3 +86,65 @@ app.post('/user/:uid', (req, res) => {
             .catch(error => sendError(res, error));
     });
 })
+
+
+//product
+
+app.post('/product', (req, res) => {
+    verify(req, res).then(() => {
+        console.log(`POST /product/`);
+
+        const pid = admin.database().ref('/products/').push().key;
+        const dbRef = db.ref(`/products/${pid}`);
+        const attr = req.body.attr;
+
+        console.log(`/product/ create - ${JSON.stringify(attr)}`);
+        dbRef.update(attr)
+            .then(_ => res.send({ success: true, product: attr }))
+            .catch(error => sendError(res, error));
+    });
+})
+
+app.get('/product', (req, res) => {
+    console.log(`GET /product`);
+
+    const retrieve = (limit, last) => {
+        const ref = db.ref(`products/`);
+
+        return ref.once('value').then(snapshot => {
+            const objectData = snapshot.val() || {};
+            let indexOfLast = -1;
+            const products = Object.keys(objectData).map((key, idx) => {
+                objectData[key].id = key;
+                if(key === last) indexOfLast = idx;
+                return objectData[key];
+            })
+            // limit - 5 / last - undefined
+            // [a,b,c,d,e,f,g]
+            // [a,b,c,d,e,f] / firstIdx = 0 / lastIdx = 5
+            // [a,b,c,d,e] / f - last / total - 7
+
+            // limit - 5 / last - f
+            // [a,b,c,d,e,f,g]
+            // [f,g] / firstIdx = 5 / lastIdx = 6
+            // [f,g] / undefined - last / total - 7
+            console.log('indexOfLast', indexOfLast, 'last', last);
+
+            const firstIdx = last ? indexOfLast : 0;
+            const lastIdx = firstIdx + limit + 1;
+            console.log('lastIdx', lastIdx, 'firstIdx', firstIdx);
+
+            const sliced = products.slice(Math.max(firstIdx, 0), Math.min(lastIdx, products.length));
+            console.log('sliced', sliced);
+            let cursor = undefined;
+            if (sliced.length > limit) 
+                cursor = sliced.pop().id;
+            console.log('cursor', cursor);
+            return { products: sliced, total: Object.keys(objectData).length, last: cursor };
+        });
+    };
+
+    retrieve(req.query.limit * 1 || 3, req.query.last)
+    .then(result => res.send(result))
+    .catch(error => sendError(res, error));
+});

@@ -8,4 +8,5 @@ export default {
     'Posting': 'Posting',
     'Detail': 'Details',
     'Cart': 'Cart',
+    'Create': 'Create'
 }

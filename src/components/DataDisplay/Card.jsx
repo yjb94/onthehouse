@@ -71,9 +71,11 @@ export default class Card extends React.Component {
                     style={{ backgroundImage:`url(${image})` }}
                 />
                 <TextContainer>
-                    <Time>
-                        {moment(date).format('LL')}
-                    </Time>
+                    {date &&
+                        <Time>
+                            {moment(date).format('LL')}
+                        </Time>
+                    }
                     <Title>
                         {title}
                     </Title>

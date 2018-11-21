@@ -12,6 +12,9 @@ import Posting from "./Blog/Posting";
 
 import Cart from "./Order/Cart";
 
+import Admin from "./Admin/Admin";
+import AdminProduct from "./Admin/Product";
+
 export {
     Home,
 
@@ -26,4 +29,7 @@ export {
     Posting,
 
     Cart,
+
+    Admin,
+    AdminProduct
 }

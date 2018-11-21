@@ -49,12 +49,7 @@ class AuthStore {
                 return this.user;
             }).catch(_ => null);
         }
-
-        if(!localStorage.getItem('idToken')) {
-            getIdToken().then(loadUserData);
-        } else {
-            loadUserData()
-        }
+        getIdToken().then(loadUserData);
     }
 
     @action setUser = (uid, attr) => {

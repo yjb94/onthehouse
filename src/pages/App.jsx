@@ -10,6 +10,7 @@ import { firebaseApp } from '../module/firebase';
 import Slider from '../components/Feedback/Slider';
 import HamburgerMenu from '../components/Button/HamburgerMenu';
 import NavigationMenu from '../components/Navigation/NavigationMenu';
+import { UserType } from '../constants/ID';
 
 const propTypes = {};
 
@@ -61,7 +62,7 @@ class App extends React.Component {
         // log in(now, when session was maintained) / logout
         firebaseApp.auth().onAuthStateChanged((currentUser) => {
             //get user data
-            if(currentUser) {
+            if(currentUser && !this.props.user) {
                 this.props.getUser();
             }
         });
@@ -95,16 +96,27 @@ class App extends React.Component {
         slider.close();
     }
 
+    renderAdminRoutes() {
+        return (
+            <div>
+                <Route exact path={routes.ADMIN.route}         component={pages.Admin}/>
+                <Route exact path={routes.ADMIN_PRODUCT.route} component={pages.AdminProduct}/>  
+            </div>          
+        )
+    }
+
     render() {
-        const { isMobileSize, headerHeight } = this.props;
+        const { isMobileSize, headerHeight, user } = this.props;
 
         return (
             <RootContainer>
                 <GlobalStyle/>
 
-                <Slider>
-                    <NavigationMenu/>
-                </Slider>
+                {isMobileSize &&
+                    <Slider>
+                        <NavigationMenu/>
+                    </Slider>
+                }
 
                 {isMobileSize && <HamburgerMenu/>}
 
@@ -121,6 +133,7 @@ class App extends React.Component {
                     <Route exact path={routes.POSTING.route} component={pages.Posting}/>
                     <Route exact path={routes.DETAIL.route}  component={pages.Detail}/>
                     <Route exact path={routes.CART.route}    component={pages.Cart}/>
+                    {user && user.role === UserType.admin && this.renderAdminRoutes()}
                 </Contents>
 
                 <Footer/>
