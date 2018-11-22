@@ -3,7 +3,7 @@ import { createGlobalStyle } from "styled-components";
 export const GlobalStyle = createGlobalStyle`
     * {
         font-size:16px;
-        font-family: source-han-serif-korean, serif;
+        font-family: 'Noto Serif KR', sans-serif;
         font-weight: 400;
     }
 
@@ -31,6 +31,7 @@ export const GlobalStyle = createGlobalStyle`
     input:-webkit-autofill:hover, 
     input:-webkit-autofill:focus, 
     input:-webkit-autofill:active  {
-        box-shadow: 0 0 0 30px white inset;
+        /* box-shadow: 0 0 0 30px white inset; */
+        transition: background-color 5000s ease-in-out 0s;
     }
 `

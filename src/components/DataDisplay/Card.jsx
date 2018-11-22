@@ -43,6 +43,7 @@ const Title = styled.div`
 `;
 const Description = styled.div`
     font-size: 0.8em;
+    font-family: 'Noto Sans KR', sans-serif;
     color:#777;
 `;
 const Time = styled.div`

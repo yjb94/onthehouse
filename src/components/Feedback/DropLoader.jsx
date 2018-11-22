@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from "styled-components";
+import { config } from '../../constants/general';
 
 const Container = styled.div`
     display: inline-block;
@@ -65,7 +66,7 @@ DropLoader.propTypes = {
 
 DropLoader.defaultProps = {
     loading: false,
-    color: '#000000',
+    color: config.color.key,
     size: 28,
     sizeUnit: 'px',
 };

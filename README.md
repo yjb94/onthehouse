@@ -109,3 +109,10 @@ it's because of server side routing conflicts with client side routing
 > yarn add react-intl
 
 17. added Authorization for request using firebase idtoken
+
+18. font loading
+
+korean fonts are extremely large. so we need good loading logic
+
+[reference](http://wit.nts-corp.com/2017/02/13/4258)
+[reference](https://nolboo.kim/blog/2013/10/22/google-web-font-faster-tip/)

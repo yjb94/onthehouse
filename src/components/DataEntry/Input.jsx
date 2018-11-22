@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from "styled-components";
+import { config } from '../../constants/general';
 
 const propTypes = {
     value:PropTypes.string.isRequired,
@@ -37,16 +38,16 @@ const Label = styled.label`
     white-space: nowrap;
     padding: 0;
     margin: 0;
-    border-top: 1px solid #999;
-    transition: width 0.4s ease;
+    border-top: 1px solid ${props => props.focused ? config.color.key : config.color.disabled};
+    transition: width 0.4s ease, border-top 0.4s ease;
     height: 0px;
 
     >span {
         margin: 0;
         position: absolute;
-        font-size: ${props => props.focused ? '0.6em' : '1em'};
+        font-size: ${props => `${(props.focused ? 0.6 : 1)}em`};
         color: #8F8F8F;
-        top: ${props => props.focused ? '-3.5em' : '-1.2em'};
+        top: ${props => props.focused ? '-4em' : '-1.5em'};
         left: 0px;
         z-index: -1;
         transition: top 0.2s ease, font-size 0.2s ease, color 0.2s ease;

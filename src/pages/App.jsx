@@ -12,6 +12,7 @@ import HamburgerMenu from '../components/Button/HamburgerMenu';
 import NavigationMenu from '../components/Navigation/NavigationMenu';
 import { UserType } from '../constants/ID';
 import { GlobalStyle } from '../constants/globalStyles';
+import { config } from '../constants/general';
 
 const propTypes = {};
 

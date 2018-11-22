@@ -11,3 +11,11 @@ export function getConfig() {
         headers: { 'Content-Type': 'application/json', 'Authorization':idToken }
     }
 }
+
+
+export const config = {
+    color:{
+        key:"#F7703C",
+        disabled:"#999"
+    },
+}
