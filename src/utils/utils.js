@@ -31,6 +31,12 @@ export function getIdToken() {
     }).catch(console.error);
 }
 
+export function changeOpacity(color, value) {
+    let parts = color.split(',');
+    parts[parts.length - 1] = `${value})`;
+    return parts.join(',');
+}
+
 export function getFileExt(name) {
     return name.split('.').pop();
 }

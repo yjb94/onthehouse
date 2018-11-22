@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from "styled-components";
 import { config } from '../../constants/general';
+import { changeOpacity } from '../../utils/utils';
 
 const propTypes = {
     value:PropTypes.string.isRequired,
@@ -19,11 +20,23 @@ const defaultProps = {
     multiline:false
 };
 
+const baseShadow = `0 2px 4px rgba(0,0,0,0.1)`
+
 const Container = styled.div`
     width: 100%;
     position: relative;
-    height: 2em;
     margin-bottom:20px;
+    padding: 8px;    
+    
+    border: 1px solid #EBEBEB;
+    transition: box-shadow 200ms ease-in;
+    border-radius: 1px;
+
+    box-shadow: ${props => props.focused ? `${changeOpacity(config.color.key, 0.2)} 0px 4px 12px !important` : baseShadow };
+
+    :hover {
+        box-shadow:${`${baseShadow}, rgba(26, 26, 29, 0.08) 0px 4px 12px`};
+    }
 `;
 const InputBox = styled.input`
     margin: 0;
@@ -33,25 +46,17 @@ const InputBox = styled.input`
     transition: padding-top 0.2s ease, margin-top 0.2s ease;
 `;
 const Label = styled.label`
-    display: block;
-    position: relative;
-    white-space: nowrap;
-    padding: 0;
     margin: 0;
-    border-top: 1px solid ${props => props.focused ? config.color.key : config.color.disabled};
-    transition: width 0.4s ease, border-top 0.4s ease;
-    height: 0px;
-
-    >span {
-        margin: 0;
-        position: absolute;
-        font-size: ${props => `${(props.focused ? 0.6 : 1)}em`};
-        color: #8F8F8F;
-        top: ${props => props.focused ? '-4em' : '-1.5em'};
-        left: 0px;
-        z-index: -1;
-        transition: top 0.2s ease, font-size 0.2s ease, color 0.2s ease;
-    }
+    position: absolute;
+    font-size: 1em;
+    color: ${config.color.disabled};
+    top: 50%;
+    left: 8px;
+    padding:px;
+    opacity: ${props => props.show ? 1 : 0};
+    transform: translateY(-50%);
+    z-index: -1;
+    transition: opacity 0.2s ease;
 `;
 
 export default class Input extends React.Component {
@@ -59,23 +64,26 @@ export default class Input extends React.Component {
         super(props);
 
         this.state = {
-            focused:false
+            focused:false,
+            showPlaceholder:true,
         };
     }
+
     onFocus = () => {
-        this.setState({ focused:true });
+        this.setState({ focused:true, showPlaceholder:false });
     }
     onBlur = () => {
         const { value } = this.props;
-        if(!value) this.setState({ focused:false });
+        
+        this.setState({ focused:false, showPlaceholder:!value });
     }
 
     render() {
         const { id, label, value, onChange, type } = this.props;
-        const { focused } = this.state;
+        const { focused, showPlaceholder } = this.state;
 
         return (
-            <Container>
+            <Container focused={focused}>
                 <InputBox 
                     id={id} 
                     value={value} 
@@ -86,8 +94,8 @@ export default class Input extends React.Component {
                     autoComplete="off"
                     focused={focused}
                 />
-                <Label focused={focused}>
-                    <span>{label}</span>
+                <Label show={showPlaceholder}>
+                    {label}
                 </Label>
             </Container>
         );

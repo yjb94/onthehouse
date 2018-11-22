@@ -15,7 +15,7 @@ export function getConfig() {
 
 export const config = {
     color:{
-        key:"#F7703C",
-        disabled:"#999"
+        key:"rgba(247, 112, 60, 1.0)",
+        disabled:"#777"
     },
 }
