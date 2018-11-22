@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from "styled-components";
 import moment from 'moment';
 import { numberWithCommas } from '../../utils/utils';
+import Image from './Image';
 
 const propTypes = {
     title:PropTypes.string,
@@ -23,14 +24,8 @@ const Container = styled.div`
     align-items:center;
     min-height: 400px;
     font-size: 18px;
-`;
-const Image = styled.div`
-    overflow:hidden;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 100%;
-    height: 300px;
+
+    opacity:${props => props.ready ? 1 : 0};
 `;
 const TextContainer = styled.div`
     text-align:center;
@@ -63,14 +58,25 @@ const Divider = styled.div`
 `;
 
 export default class Card extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            imageReady:false
+        }
+    }
+
+    onImageLoad = () => {
+        this.setState({ imageReady:true });
+    }
+
     render() {
         const { onClick, title, image, date, price, description, containerStyle } = this.props;
+        const { imageReady } = this.state;
         
         return (
-            <Container onClick={onClick} style={{...containerStyle}}>
-                <Image
-                    style={{ backgroundImage:`url(${image})` }}
-                />
+            <Container onClick={onClick} ready={imageReady} style={{...containerStyle}}>
+                <Image src={image} onLoad={this.onImageLoad}/>
                 <TextContainer>
                     {date &&
                         <Time>

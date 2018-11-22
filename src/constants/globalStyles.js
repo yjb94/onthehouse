@@ -18,9 +18,13 @@ export const GlobalStyle = createGlobalStyle`
         color: inherit;
         background-color: transparent;
         cursor: pointer;
+        transition: opacity 0.2s ease-out;
     }
     button:focus {
         outline: none;
+    }
+    button:hover {
+        opacity:0.5;
     }
 
     textarea, input { 

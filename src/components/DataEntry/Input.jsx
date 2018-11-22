@@ -31,7 +31,8 @@ const Container = styled.div`
     border: 1px solid #EBEBEB;
     transition: box-shadow 200ms ease-in;
     border-radius: 1px;
-
+    
+    box-sizing: border-box;
     box-shadow: ${props => props.focused ? `${changeOpacity(config.color.key, 0.2)} 0px 4px 12px !important` : baseShadow };
 
     :hover {
@@ -65,22 +66,19 @@ export default class Input extends React.Component {
 
         this.state = {
             focused:false,
-            showPlaceholder:true,
         };
     }
 
     onFocus = () => {
-        this.setState({ focused:true, showPlaceholder:false });
+        this.setState({ focused:true });
     }
     onBlur = () => {
-        const { value } = this.props;
-        
-        this.setState({ focused:false, showPlaceholder:!value });
+        this.setState({ focused:false });
     }
 
     render() {
         const { id, label, value, onChange, type } = this.props;
-        const { focused, showPlaceholder } = this.state;
+        const { focused } = this.state;
 
         return (
             <Container focused={focused}>
@@ -94,7 +92,7 @@ export default class Input extends React.Component {
                     autoComplete="off"
                     focused={focused}
                 />
-                <Label show={showPlaceholder}>
+                <Label show={!value}>
                     {label}
                 </Label>
             </Container>
