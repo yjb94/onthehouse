@@ -30,6 +30,7 @@ export const GlobalStyle = createGlobalStyle`
     textarea, input { 
         border: none;
         outline: none; 
+        resize: none;
     }
     input:-webkit-autofill,
     input:-webkit-autofill:hover, 

@@ -21,12 +21,14 @@ const defaultProps = {
 };
 
 const baseShadow = `0 2px 4px rgba(0,0,0,0.1)`
+const paddingNum = 8;
+const padding = `${paddingNum}px`;
 
 const Container = styled.div`
     width: 100%;
     position: relative;
     margin-bottom:20px;
-    padding: 8px;    
+    padding: ${padding};    
     
     border: 1px solid #EBEBEB;
     transition: box-shadow 200ms ease-in;
@@ -46,16 +48,23 @@ const InputBox = styled.input`
     background-color:transparent;
     transition: padding-top 0.2s ease, margin-top 0.2s ease;
 `;
+const TextArea = styled.textarea`
+    margin: 0;
+    border: none;
+    width: 100%;
+    background-color:transparent;
+    transition: padding-top 0.2s ease, margin-top 0.2s ease;
+`;
 const Label = styled.label`
     margin: 0;
     position: absolute;
     font-size: 1em;
     color: ${config.color.disabled};
-    top: 50%;
-    left: 8px;
-    padding:px;
+    top: ${props => props.multiline ? `${paddingNum+2}px` : '50%'};
+    /* left: ${`${paddingNum+2}px`}; */
+    left: ${padding};
     opacity: ${props => props.show ? 1 : 0};
-    transform: translateY(-50%);
+    transform: ${props => props.multiline ? 'none' : 'translateY(-50%)'};
     z-index: -1;
     transition: opacity 0.2s ease;
 `;
@@ -77,22 +86,35 @@ export default class Input extends React.Component {
     }
 
     render() {
-        const { id, label, value, onChange, type } = this.props;
+        const { id, label, value, onChange, type, multiline } = this.props;
         const { focused } = this.state;
 
         return (
             <Container focused={focused}>
-                <InputBox 
-                    id={id} 
-                    value={value} 
-                    type={type}
-                    onChange={onChange} 
-                    onFocus={this.onFocus}
-                    onBlur={this.onBlur}
-                    autoComplete="off"
-                    focused={focused}
-                />
-                <Label show={!value}>
+                {multiline ? 
+                    <TextArea
+                        id={id} 
+                        value={value} 
+                        type={type}
+                        onChange={onChange} 
+                        onFocus={this.onFocus}
+                        onBlur={this.onBlur}
+                        autoComplete="off"
+                        focused={focused}
+                    />
+                    :
+                    <InputBox 
+                        id={id} 
+                        value={value} 
+                        type={type}
+                        onChange={onChange} 
+                        onFocus={this.onFocus}
+                        onBlur={this.onBlur}
+                        autoComplete="off"
+                        focused={focused}
+                    />
+                }
+                <Label show={!value} multiline={multiline}>
                     {label}
                 </Label>
             </Container>

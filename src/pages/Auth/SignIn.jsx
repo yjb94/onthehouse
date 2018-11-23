@@ -22,8 +22,6 @@ const Form = styled.form`
     padding:25px;
     box-shadow: 0 2px 50px 0 rgba(0, 0, 0, 0.2);
 `;
-const SignInButton = styled.button`
-`;
 const ForgotPassword = styled.button`
 `;
 

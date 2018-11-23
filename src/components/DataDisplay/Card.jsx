@@ -62,7 +62,7 @@ export default class Card extends React.Component {
         super(props);
 
         this.state = {
-            imageReady:false
+            imageReady:!props.image
         }
     }
 
@@ -76,7 +76,7 @@ export default class Card extends React.Component {
         
         return (
             <Container onClick={onClick} ready={imageReady} style={{...containerStyle}}>
-                <Image src={image} onLoad={this.onImageLoad}/>
+                {image && <Image src={image} onLoad={this.onImageLoad}/>}
                 <TextContainer>
                     {date &&
                         <Time>

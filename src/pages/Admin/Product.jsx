@@ -5,6 +5,7 @@ import Input from '../../components/DataEntry/Input';
 import { InputID } from '../../constants/ID';
 import { FormattedMessage } from 'react-intl';
 import ImageInput from '../../components/DataEntry/ImageInput';
+import { injectIntl } from 'react-intl';
 import { uploadImage } from '../../utils/utils';
 
 const Container = styled.form`
@@ -35,7 +36,7 @@ class Product extends React.Component {
         this.state = {
             title:'',
             description:'',
-            price:0,
+            price:'',
             image:{ preview:'', file:undefined }
         }
     }
@@ -77,6 +78,7 @@ class Product extends React.Component {
     }
 
     render() {
+        const { intl } = this.props;
         const { title, description, price, image } =  this.state;
 
         return (
@@ -86,16 +88,20 @@ class Product extends React.Component {
                         id={InputID.title} 
                         value={title} 
                         onChange={this.onInputChange}
+                        label={intl.formatMessage({ id: 'Title' })}
                     />
                     <Input 
                         id={InputID.description} 
                         value={description} 
+                        multiline={true}
                         onChange={this.onInputChange}
+                        label={intl.formatMessage({ id: 'Detail' })}
                     />
                     <Input 
                         id={InputID.price} 
-                        value={price.toString()} 
+                        value={price} 
                         onChange={this.onInputChange}
+                        label={intl.formatMessage({ id: 'Price' })}
                     />
                     <ImageInput
                         onImageReady={this.onImageReady}
@@ -113,4 +119,4 @@ class Product extends React.Component {
 Product.defaultProps = {
 };
 
-export default Product;
+export default injectIntl(Product);
