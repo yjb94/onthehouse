@@ -108,13 +108,13 @@ class App extends React.Component {
             <RootContainer>
                 <GlobalStyle/>
 
-                {isMobileSize &&
+                {/* {isMobileSize &&
                     <Slider>
                         <NavigationMenu/>
                     </Slider>
-                }
+                } */}
 
-                {isMobileSize && <HamburgerMenu/>}
+                {/* {isMobileSize && <HamburgerMenu/>} */}
 
                 <Header/>
 

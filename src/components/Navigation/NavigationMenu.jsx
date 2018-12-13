@@ -20,7 +20,6 @@ const Conatiner = styled.div`
 class NavigationMenu extends React.Component {
     render() {
         const { isMobileSize, routes, curRoute } = this.props;
-        if(isMobileSize) return null;
 
         const itemsView = routes.map((each, idx) => {
             const active = each.route === curRoute.pathname;
@@ -45,6 +44,7 @@ class NavigationMenu extends React.Component {
 }
 
 NavigationMenu.defaultProps = {
+    routes: []
 };
 
 NavigationMenu.propTypes = {
