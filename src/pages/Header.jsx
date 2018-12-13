@@ -10,15 +10,13 @@ import zIndex from '../constants/zIndex';
 import Logo from '../assets/img/logo';
 import { withRouter } from "react-router-dom";
 import { config } from '../constants/general';
-import { DEFAULT_SELECTED_CATEGORY } from '../constants/constants';
-import { getQueryParameter } from '../utils/utils';
 
 const Container = styled.header`
     top: 0;
     left: 0;
     right: 0;
     background-color:white;
-    position: fixed;
+    position: sticky;
     z-index:${zIndex.Header};
 `;
 const MainHeader = styled.div`
@@ -67,8 +65,6 @@ const TabContainer = styled.div`
 `;
 
 @inject(store => ({
-    setHeaderHeight:store.header.setHeaderHeight,
-
     user:store.auth.user,
     logout:store.auth.logout,
     tab:store.header.tab,
@@ -83,19 +79,6 @@ class Header extends React.Component {
         this.state = {
         }
     }
-
-    componentDidMount = () => {
-        const { setHeaderHeight } = this.props;
-        setHeaderHeight();
-    }
-
-    componentDidUpdate = (prevProps, prevState) => {
-        const { tab, setHeaderHeight } = this.props;
-
-        if(prevProps.tab !== tab)
-            setHeaderHeight();      
-    }
-    
     
     handleLogout = () => {
         this.props.logout();

@@ -7,21 +7,20 @@ import NavigationItem from './NavigationItem';
 const Conatiner = styled.div`
     display:flex;
     flex-direction: ${props => props.isMobile ? 'column' : 'row'};
-    padding-top:${props => props.top}px;
 
     font-family: 'Avenir Next', sans-serif;
 `;
 
 @inject(store => ({
     slider:store.slider,
-    headerHeight:store.header.headerHeight,
     isMobileSize:store.screen.isMobileSize,
     curRoute:store.route.curRoute,
 }))
 @observer
 class NavigationMenu extends React.Component {
     render() {
-        const { headerHeight, isMobileSize, routes, curRoute } = this.props;
+        const { isMobileSize, routes, curRoute } = this.props;
+        if(isMobileSize) return null;
 
         const itemsView = routes.map((each, idx) => {
             const active = each.route === curRoute.pathname;
@@ -38,7 +37,7 @@ class NavigationMenu extends React.Component {
         })
 
         return (
-            <Conatiner top={isMobileSize ? headerHeight : 0} isMobile={isMobileSize}>
+            <Conatiner isMobile={isMobileSize}>
                 {itemsView}
             </Conatiner>
         );

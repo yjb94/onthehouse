@@ -7,6 +7,7 @@ import { withRouter } from "react-router-dom";
 import { DETAIL } from '../../../constants/routes';
 import DropLoader from '../../../components/Feedback/DropLoader';
 import Banner from '../../../components/DataDisplay/Banner';
+import _ from 'lodash';
 
 const Container = styled.div`
     display:flex;
@@ -66,7 +67,11 @@ class CreativeWorks extends React.Component {
         const { products, isFetching } = this.props;
 
         let cardViews = products.map((each, idx) => {
-            return <Card key={idx} onClick={this.onClickItem.bind(this, each)} {...each}/>
+            return <Card 
+                        key={idx} 
+                        onClick={this.onClickItem.bind(this, each)} 
+                        {..._.omit(each, 'price')}
+                    />
         })
 
         return (
@@ -74,7 +79,11 @@ class CreativeWorks extends React.Component {
                 <Banner
                     title={'온더하우스 개인 맞춤 글'} 
                     subtitle={'아름답게 기억되고 싶은 결혼, 두 사람의 특별함을 더할 소중한 글과 함께하세요.'}
-                    image={'https://firebasestorage.googleapis.com/v0/b/onthe-house.appspot.com/o/banner.jpg?alt=media&token=432d9cab-0c6c-41bc-ac94-40d81b01b5c9'}
+                    image={'https://picsum.photos/1920/1080/?image=454'}
+                    style={{
+                        justifyContent:'flex-end',
+                        alignItems:'flex-start',
+                    }}
                 />
                 <MasonryContainer>
                     <Masonry views={cardViews}/>

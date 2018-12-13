@@ -12,27 +12,27 @@ import HamburgerMenu from '../components/Button/HamburgerMenu';
 import NavigationMenu from '../components/Navigation/NavigationMenu';
 import { UserType } from '../constants/ID';
 import { GlobalStyle } from '../constants/globalStyles';
-import { config } from '../constants/general';
 
 const propTypes = {};
 
 const defaultProps = {};
 
 const Contents = styled.div`
-    padding-top:${props => props.top}px;
 `;
 
 const RootContainer = styled.div`
     width: -webkit-fill-available;
     height: -webkit-fill-available;
+
+    margin: 0 auto;
+
+    position:relative;
 `;
 
 @inject(store => ({
     onScroll:store.scroll.onScroll,
     scrollOffset:store.scroll.isScrolled,
 
-    headerHeight:store.header.headerHeight,
-    
     isMobileSize:store.screen.isMobileSize,
     resize:store.screen.resize,
 
@@ -102,7 +102,7 @@ class App extends React.Component {
     }
 
     render() {
-        const { isMobileSize, headerHeight, user } = this.props;
+        const { isMobileSize, user } = this.props;
 
         return (
             <RootContainer>
@@ -118,7 +118,7 @@ class App extends React.Component {
 
                 <Header/>
 
-                <Contents top={headerHeight}>
+                <Contents>
                     <Route exact path={routes.LANDING.route} component={pages.Home}/>
                     <Route exact path={routes.HOME.route}    component={pages.Home}/>
                     <Route exact path={routes.SIGN_IN.route} component={pages.SignIn}/>

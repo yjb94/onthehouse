@@ -6,8 +6,6 @@ import SwipeableViews from 'react-swipeable-views';
 import CreativeWorks from './Category/CreativeWorks';
 import Goods from './Category/Goods';
 import { Category } from '../../constants/ID';
-import { DEFAULT_SELECTED_CATEGORY } from '../../constants/constants';
-import { getQueryParameter } from '../../utils/utils';
 
 const Container = styled.div`
     display:flex;

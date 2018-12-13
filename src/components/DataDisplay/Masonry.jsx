@@ -14,14 +14,14 @@ const Container = styled.div`
     width: 100%;
     display:grid;
     grid-gap: 50px 30px;
-    grid-template-columns: repeat(auto-fill, minmax(25vw, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(25%, 1fr));
     transition: .3s;
 
     @media (max-width: 768px) {
-        grid-template-columns: repeat(auto-fill, minmax(33vw, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(33%, 1fr));
     }
     @media (max-width: 480px) {
-        grid-template-columns: repeat(auto-fill, minmax(50vw, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
     }
 `;
 

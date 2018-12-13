@@ -25,8 +25,12 @@ const Container = styled.div`
     min-height: 400px;
     font-size: 18px;
 
-    transition: opacity .3s ease-in;
+    transition: opacity .3s ease-in, box-shadow .25s ease-in-out;
     opacity:${props => props.ready ? 1 : 0};
+
+    :hover {
+        box-shadow:0px 2px 30px rgba(0, 0, 0, 0.5);
+    }
 `;
 const TextContainer = styled.div`
     text-align:center;
@@ -63,7 +67,7 @@ export default class Card extends React.Component {
         super(props);
 
         this.state = {
-            imageReady:!props.image
+            imageReady:!props.image,
         }
     }
 
@@ -76,7 +80,11 @@ export default class Card extends React.Component {
         const { imageReady } = this.state;
         
         return (
-            <Container onClick={onClick} ready={imageReady} style={{...containerStyle}}>
+            <Container 
+                onClick={onClick}
+                ready={imageReady}
+                style={{...containerStyle}}
+            >
                 {image && <Image src={image} onLoad={this.onImageLoad}/>}
                 <TextContainer>
                     {date &&
