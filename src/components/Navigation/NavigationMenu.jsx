@@ -14,7 +14,7 @@ const Conatiner = styled.div`
 
 @inject(store => ({
     slider:store.slider,
-    headerHeight:store.screen.headerHeight,
+    headerHeight:store.header.headerHeight,
     isMobileSize:store.screen.isMobileSize,
     curRoute:store.route.curRoute,
 }))

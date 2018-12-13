@@ -35,18 +35,17 @@ const InnerContainer = styled.div`
     align-items: center;
     text-align: center;
     color:white;
-    font-size: 16px;
 
     padding: 0px 20px;
 `;
 
 const Title = styled.div`
-    font-size: 1.5em;
+    font-size: 32px;
     margin-bottom: 8px;
 `;
 
 const Subtitle = styled.div`
-    font-size: 1.0em;
+    font-size: 20px;
 `;
 
 export default class Banner extends React.Component {

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { observer, inject } from 'mobx-react';
 import { withRouter } from "react-router-dom";
 import SwipeableViews from 'react-swipeable-views';
-import CreativeWork from './Category/CreativeWork';
+import CreativeWorks from './Category/CreativeWorks';
 import Goods from './Category/Goods';
 import { Category } from '../../constants/ID';
 import { DEFAULT_SELECTED_CATEGORY } from '../../constants/constants';
@@ -64,7 +64,7 @@ class Shop extends React.Component {
         return (
             <Container>
                 <SwipeableViews index={tabIdx} onChangeIndex={this.handleChange}>
-                    <CreativeWork/>
+                    <CreativeWorks/>
                     <Goods/>
                 </SwipeableViews>
             </Container>

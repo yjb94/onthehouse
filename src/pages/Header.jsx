@@ -67,7 +67,8 @@ const TabContainer = styled.div`
 `;
 
 @inject(store => ({
-    setHeaderHeight:store.screen.setHeaderHeight,
+    setHeaderHeight:store.header.setHeaderHeight,
+
     user:store.auth.user,
     logout:store.auth.logout,
     tab:store.header.tab,
@@ -87,6 +88,14 @@ class Header extends React.Component {
         const { setHeaderHeight } = this.props;
         setHeaderHeight();
     }
+
+    componentDidUpdate = (prevProps, prevState) => {
+        const { tab, setHeaderHeight } = this.props;
+
+        if(prevProps.tab !== tab)
+            setHeaderHeight();      
+    }
+    
     
     handleLogout = () => {
         this.props.logout();

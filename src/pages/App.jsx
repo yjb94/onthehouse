@@ -31,7 +31,8 @@ const RootContainer = styled.div`
     onScroll:store.scroll.onScroll,
     scrollOffset:store.scroll.isScrolled,
 
-    headerHeight:store.screen.headerHeight,
+    headerHeight:store.header.headerHeight,
+    
     isMobileSize:store.screen.isMobileSize,
     resize:store.screen.resize,
 

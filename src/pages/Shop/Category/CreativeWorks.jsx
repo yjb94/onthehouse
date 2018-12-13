@@ -40,7 +40,7 @@ const LoaderContainer = styled.div`
     shouldLoad:store.scroll.shouldLoad
 }))
 @observer
-class CreativeWork extends React.Component {
+class CreativeWorks extends React.Component {
     componentDidMount = () => {
         this.load();
     }
@@ -87,7 +87,7 @@ class CreativeWork extends React.Component {
     }
 }
 
-CreativeWork.defaultProps = {
+CreativeWorks.defaultProps = {
 };
 
-export default withRouter(CreativeWork);
+export default withRouter(CreativeWorks);

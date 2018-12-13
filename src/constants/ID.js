@@ -12,5 +12,5 @@ export const UserType = {
 }
 
 export const Category = [
-    'Creative work', 'Goods'
+    'Creative Works', 'Goods'
 ]
