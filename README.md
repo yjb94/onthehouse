@@ -116,3 +116,9 @@ korean fonts are extremely large. so we need good loading logic
 
 [reference](http://wit.nts-corp.com/2017/02/13/4258)
 [reference](https://nolboo.kim/blog/2013/10/22/google-web-font-faster-tip/)
+
+19. uglify js for webpack 4
+
+[reference](https://stackoverflow.com/questions/49053215/webpack-4-how-to-configure-minimize)
+
+> yarn add uglifyjs-webpack-plugin

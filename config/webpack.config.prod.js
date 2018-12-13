@@ -21,6 +21,7 @@ const getClientEnvironment = require('./env');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin-alt');
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 
 // Webpack uses `publicPath` to determine where the app is being served from.
@@ -190,6 +191,7 @@ module.exports = {
             : false,
         },
       }),
+      new UglifyJsPlugin()
     ],
     // Automatically split vendor and commons
     // https://twitter.com/wSokra/status/969633336732905474
