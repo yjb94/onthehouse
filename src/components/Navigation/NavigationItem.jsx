@@ -4,10 +4,15 @@ import PropTypes from 'prop-types';
 import { observer, inject } from 'mobx-react';
 import { DEFAULT_ROUTE } from '../../constants/routes';
 import { withRouter } from "react-router-dom";
-import { injectIntl } from 'react-intl'
+import { injectIntl } from 'react-intl';
+import { config } from '../../constants/general';
 
 const Conatiner = styled.button`
     position:flex;
+
+    color:${props => props.active ? `${config.color.key}` : `${config.color.tundora}`};
+
+    transition: .2s color ease-in-out  .2s opacity ease-in-out;
 `;
 
 @inject(store => ({
@@ -27,7 +32,10 @@ class NavigationItem extends React.Component {
         const name =  data.id ? intl.formatMessage({ id: data.id }) : data.name;
 
         return (
-            <Conatiner onClick={this.onNav}>
+            <Conatiner 
+                onClick={this.onNav}
+                {...this.props}
+            >
                 {custom ? children : name}
             </Conatiner>
         );
@@ -36,11 +44,13 @@ class NavigationItem extends React.Component {
 
 NavigationItem.propTypes = {
     data: PropTypes.object.isRequired,
+    active: PropTypes.bool.isRequired,
     custom: PropTypes.bool,
 };
 NavigationItem.defaultProps = {
     data: DEFAULT_ROUTE,
-    custom: false
+    custom: false,
+    active: false
 };
 
 export default injectIntl(withRouter(NavigationItem));

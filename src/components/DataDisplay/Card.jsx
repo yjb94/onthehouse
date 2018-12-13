@@ -25,6 +25,7 @@ const Container = styled.div`
     min-height: 400px;
     font-size: 18px;
 
+    transition: opacity .3s ease-in;
     opacity:${props => props.ready ? 1 : 0};
 `;
 const TextContainer = styled.div`

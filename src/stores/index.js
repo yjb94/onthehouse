@@ -4,6 +4,7 @@ import screen from './screen/screen';
 import auth from './auth';
 import product from './product';
 import route from './route';
+import header from './header';
 
 export default {
     slider:slider,
@@ -12,4 +13,5 @@ export default {
     auth:auth,
     product:product,
     route:route,
+    header:header
 }

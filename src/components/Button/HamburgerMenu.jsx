@@ -9,7 +9,7 @@ const Conatiner = styled.button`
     position: fixed;
     transform: rotate(0deg);
     transition: .5s ease-in-out;
-    z-index:${zIndex.Hamburger}
+    z-index:${zIndex.Hamburger};
     margin: 50px;
     right: 0;
 

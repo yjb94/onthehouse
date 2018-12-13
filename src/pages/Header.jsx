@@ -1,64 +1,86 @@
 import React from 'react';
 import styled from "styled-components";
-import LinkIcon from '../components/Button/LinkIcon';
-import instagram from '@fortawesome/fontawesome-free-brands/faInstagram'
 import { observer, inject } from 'mobx-react';
 import NavigationMenu from '../components/Navigation/NavigationMenu';
 import NavigationItem from '../components/Navigation/NavigationItem';
-import { SIGN_IN, HOME } from '../constants/routes';
+import TabButton from '../components/Button/TabButton';
+import { SIGN_IN, HOME, ACCOUNT, SHOP, BLOG } from '../constants/routes';
 import { FormattedMessage } from 'react-intl';
+import zIndex from '../constants/zIndex';
+import Logo from '../assets/img/logo';
+import { withRouter } from "react-router-dom";
+import { config } from '../constants/general';
+import { Category } from '../constants/ID';
+import { getQueryParameter } from '../utils/utils';
 
 const Container = styled.header`
-    display:flex;
-    flex-direction:row;
-    align-items:center;
-    padding: 40px 30px;
-    max-height: 100px;
     top: 0;
     left: 0;
     right: 0;
     background-color:white;
     position: fixed;
+    z-index:${zIndex.Header};
+`;
+const MainHeader = styled.div`
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    padding: 30px 80px;
+    max-height: 65px;
 `;
 const LeftContainer = styled.div`
     display:flex;
     align-items:center;
-    justify-content:flex-start;
+    justify-content:center;
 
-    font-size: 30px;
-    border-top: 1px solid black;
-    border-bottom: 1px solid black;
+    flex: 1;
 `;
 const MiddleContainer = styled.div`
     display:flex;
     align-items:center;
     justify-content:center;
-    flex: 1;
+
+    font-size: 40px;
+`;
+const LogoOnthehouse = styled.img`
+    width: 177px;
+    height:36.71px;
 `;
 const RightContainer = styled.div`
     display:flex;
     align-items:center;
-    justify-content:flex-end;
+    justify-content:center;
+
     flex: 1;
 `;
 const LogoutButton = styled.button`
 `;
-const IconContainer = styled.div`
-    margin-left: 8px;
-    background:${props => props.background || 'transparent'};
-    color:${props => props.color || 'transparent'};
-    font-size:20px;
-    border-radius:50%;
+
+const TabContainer = styled.div`
+    display:flex;
+    position:relative;
+    justify-content: flex-start;
+    align-items: center;
+    background-color:${config.color.aquaHaze};
+    z-index:${zIndex.Category};
+    padding:20px 50px;
 `;
 
 @inject(store => ({
-    isMobileSize:store.screen.isMobileSize,
     setHeaderHeight:store.screen.setHeaderHeight,
     user:store.auth.user,
     logout:store.auth.logout,
+    headerTab:store.header.headerTab
 }))
 @observer
 class Header extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+        }
+    }
+
     componentDidMount = () => {
         const { setHeaderHeight } = this.props;
         setHeaderHeight();
@@ -84,36 +106,57 @@ class Header extends React.Component {
         }
     }
 
+    handleChangeIndex = (index) => {
+        // this.setState({ tabIndex:index })
+    }
+    onClickTab = (e) => {
+        e.preventDefault();
+        const { id } = e.target;
+        if(id) {
+            const { history } = this.props;
+            history.replace({
+                pathname: SHOP.route,
+                search: `?category=${id}`
+            });
+        }
+    }
+
+
     render() {
-        const { isMobileSize } = this.props;
+        const { headerTab } = this.props;
+
+        const tabsView = headerTab.map((each, idx) => {
+            return (
+                <TabButton  
+                    id={each} 
+                    key={idx}
+                    label={each}
+                    seperator={idx !== headerTab.length - 1}
+                    active={each === getQueryParameter('category')}
+                    onClick={this.onClickTab}
+                />
+            )
+        })
 
         return (
             <Container id="header">
-                <LeftContainer>
-                    <NavigationItem data={HOME} custom={true}>
-                        ON THE HOUSE
-                    </NavigationItem>
-                </LeftContainer>
-                {!isMobileSize && 
+                <MainHeader>
+                    <LeftContainer>
+                        <NavigationMenu routes={[SHOP, HOME]}/>
+                    </LeftContainer>
                     <MiddleContainer>
-                        <NavigationMenu/>
+                        <NavigationItem data={HOME} custom={true}>
+                            <LogoOnthehouse src={Logo.onthehouse}/>
+                        </NavigationItem>
                     </MiddleContainer>
-                }
-                <RightContainer>
-                    {!isMobileSize && this.renderAuthMenu()}
-                    {/* <IconContainer color="#333">
-                        <LinkIcon 
-                            link="https://www.instagram.com/songsong.yo/"
-                            icon={instagram}
-                        />
-                    </IconContainer>
-                    <IconContainer color="#333">
-                        <LinkIcon 
-                            link="http://blog.naver.com/onthehouse_"
-                            iconName={"square"}
-                        />
-                    </IconContainer> */}
-                </RightContainer>
+                    <RightContainer>
+                        <NavigationMenu routes={[BLOG, ACCOUNT]}/>
+                    </RightContainer>
+                </MainHeader>
+
+                <TabContainer>
+                    {tabsView}
+                </TabContainer>
             </Container>
         );
     }
@@ -123,4 +166,4 @@ Header.defaultProps = {
     
 };
 
-export default Header;
+export default withRouter(Header);

@@ -13,7 +13,6 @@ const defaultProps = {
 const Container = styled.img`
     overflow:hidden;
     opacity: ${props => props.ready ? 1 : 0};
-    transition: opacity .3s ease-in;
     object-fit:cover;
     object-position: center;
     width:100%;

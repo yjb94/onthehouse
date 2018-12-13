@@ -1,6 +1,13 @@
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
+    @font-face {
+        font-family: 'Avenir Next';
+        font-style: normal;
+        font-weight: 400;
+        src: url('../assets/fonts/AvenirNextLTPro-Regular.otf');
+    }
+
     * {
         font-size:16px;
         font-family: 'Noto Serif KR', sans-serif;

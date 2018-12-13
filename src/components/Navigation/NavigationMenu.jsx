@@ -1,36 +1,40 @@
 import React from 'react';
 import styled from "styled-components";
 import { observer, inject } from 'mobx-react';
-import { ACCOUNT, SHOP, BLOG, ADMIN } from '../../constants/routes';
+import PropTypes from 'prop-types';
 import NavigationItem from './NavigationItem';
-import { UserType } from '../../constants/ID';
-
-const NavigationRoutes = [ SHOP, BLOG, ACCOUNT ];
-const NavigationAdminRoutes = [ SHOP, BLOG, ACCOUNT, ADMIN ];
 
 const Conatiner = styled.div`
     display:flex;
     flex-direction: ${props => props.isMobile ? 'column' : 'row'};
     padding-top:${props => props.top}px;
+
+    font-family: 'Avenir Next', sans-serif;
 `;
 
 @inject(store => ({
     slider:store.slider,
-    user:store.auth.user,
     headerHeight:store.screen.headerHeight,
-    isMobileSize:store.screen.isMobileSize
+    isMobileSize:store.screen.isMobileSize,
+    curRoute:store.route.curRoute,
 }))
 @observer
 class NavigationMenu extends React.Component {
     render() {
-        const { headerHeight, isMobileSize, user } = this.props;
-        let routes = NavigationRoutes;
-        if(user && user.role === UserType.admin) {
-            routes = NavigationAdminRoutes;
-        }
+        const { headerHeight, isMobileSize, routes, curRoute } = this.props;
 
         const itemsView = routes.map((each, idx) => {
-            return <NavigationItem key={idx} data={each}/>
+            const active = each.route === curRoute.pathname;
+            return (
+                <NavigationItem 
+                    key={idx}
+                    data={each}
+                    active={active}
+                    style={{
+                        margin:'0px 30px'
+                    }}
+                />
+            )
         })
 
         return (
@@ -43,5 +47,9 @@ class NavigationMenu extends React.Component {
 
 NavigationMenu.defaultProps = {
 };
+
+NavigationMenu.propTypes = {
+    routes:PropTypes.array.isRequired,
+}
 
 export default NavigationMenu;

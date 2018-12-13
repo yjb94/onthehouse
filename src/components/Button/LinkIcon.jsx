@@ -43,15 +43,15 @@ const Container = styled.button`
 `;
 
 export default class LinkIcon extends React.Component {
-    linkTo = () => {
-        window.open(this.props.link, '_blank')
-    }
-
     componentWillMount() {
         const { iconName, iconPrefix } = this.props;
         if(iconName) {
             addIcon(iconPrefix, iconName);
         }
+    }
+    
+    linkTo = () => {
+        window.open(this.props.link, '_blank')
     }
 
     render() {

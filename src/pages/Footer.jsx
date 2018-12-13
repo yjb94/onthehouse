@@ -15,7 +15,6 @@ const Container = styled.footer`
     justify-content: center;
     align-items: center;
     color:#999;
-    margin-top: 120px;
 `;
 const LanguageContainer = styled.div`
 `;

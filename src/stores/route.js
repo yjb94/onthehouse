@@ -1,7 +1,7 @@
 import { observable, action } from 'mobx';
 
 class ProductStore {
-    @observable curRoute = undefined;
+    @observable curRoute = window.location;
 
     @action onRouteChange = (location, action) => {
         this.curRoute = location;

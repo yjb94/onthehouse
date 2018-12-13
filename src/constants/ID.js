@@ -10,3 +10,7 @@ export const InputID = {
 export const UserType = {
     admin:'admin'
 }
+
+export const Category = [
+    'Creative work', 'Goods'
+]

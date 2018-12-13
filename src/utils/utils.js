@@ -65,3 +65,8 @@ export function uploadImage(file, id) {// Create a root reference
     var ref = storageRef.child(`images/${id}.${getFileExt(file.name)}`);
     return ref.put(file).then(snapshot => snapshot.ref.getDownloadURL()).catch(console.error);
 }
+
+export function getQueryParameter(name) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(name);
+}
