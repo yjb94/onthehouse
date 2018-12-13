@@ -6,6 +6,8 @@ import SwipeableViews from 'react-swipeable-views';
 import CreativeWork from './Category/CreativeWork';
 import Goods from './Category/Goods';
 import { Category } from '../../constants/ID';
+import { DEFAULT_SELECTED_CATEGORY } from '../../constants/constants';
+import { getQueryParameter } from '../../utils/utils';
 
 const Container = styled.div`
     display:flex;
@@ -15,7 +17,10 @@ const Container = styled.div`
 `;
 
 @inject(store => ({
-    header:store.header
+    header:store.header,
+    tabIdx:store.header.tabIdx,
+    scrollOffset:store.scroll.offset,
+    scrollTo:store.scroll.scrollTo
 }))
 @observer
 class Shop extends React.Component {
@@ -23,24 +28,42 @@ class Shop extends React.Component {
         super(props);
 
         this.state = {
+            scrollPositions:[]
         }
     }
 
     componentDidMount = () => {
         const { header } = this.props;
-        header.setHeaderTab(Category);
+        header.setTab(Category);
+
+        const { scrollPositions } = this.state;
+        Category.forEach(_ => scrollPositions.push(0));
     }
+
+    componentWillReceiveProps = (nextProps) => {
+        const { tabIdx, scrollTo, scrollOffset } = this.props;
+        const nextTabIdx = nextProps.tabIdx;
+
+        //scroll position saving logic
+        if(tabIdx !== nextTabIdx) {
+            let { scrollPositions } = this.state;
+            scrollPositions[tabIdx] = scrollOffset;
+            scrollTo(scrollPositions[nextTabIdx]);
+            this.setState( scrollPositions );
+        }
+    }
+
     componentWillUnmount = () => {
         const { header } = this.props;
-        header.clearHeaderTab();
+        header.clearTab();
     }
 
     render() {
-        const { index } = this.state;
+        const { tabIdx } = this.props;
 
         return (
             <Container>
-                <SwipeableViews index={index} onChangeIndex={this.handleChangeIndex}>
+                <SwipeableViews index={tabIdx} onChangeIndex={this.handleChange}>
                     <CreativeWork/>
                     <Goods/>
                 </SwipeableViews>

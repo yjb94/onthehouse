@@ -10,7 +10,7 @@ import zIndex from '../constants/zIndex';
 import Logo from '../assets/img/logo';
 import { withRouter } from "react-router-dom";
 import { config } from '../constants/general';
-import { Category } from '../constants/ID';
+import { DEFAULT_SELECTED_CATEGORY } from '../constants/constants';
 import { getQueryParameter } from '../utils/utils';
 
 const Container = styled.header`
@@ -70,7 +70,9 @@ const TabContainer = styled.div`
     setHeaderHeight:store.screen.setHeaderHeight,
     user:store.auth.user,
     logout:store.auth.logout,
-    headerTab:store.header.headerTab
+    tab:store.header.tab,
+    tabIdx:store.header.tabIdx,
+    setTabIdx:store.header.setTabIdx,
 }))
 @observer
 class Header extends React.Component {
@@ -106,34 +108,26 @@ class Header extends React.Component {
         }
     }
 
-    handleChangeIndex = (index) => {
-        // this.setState({ tabIndex:index })
-    }
-    onClickTab = (e) => {
+    onClickTab = (idx, e) => {
         e.preventDefault();
-        const { id } = e.target;
-        if(id) {
-            const { history } = this.props;
-            history.replace({
-                pathname: SHOP.route,
-                search: `?category=${id}`
-            });
-        }
+
+        let { setTabIdx } = this.props;
+        setTabIdx(idx);
     }
 
 
     render() {
-        const { headerTab } = this.props;
+        const { tab, tabIdx } = this.props;
 
-        const tabsView = headerTab.map((each, idx) => {
+        const tabsView = tab.map((each, idx) => {
             return (
                 <TabButton  
                     id={each} 
                     key={idx}
                     label={each}
-                    seperator={idx !== headerTab.length - 1}
-                    active={each === getQueryParameter('category')}
-                    onClick={this.onClickTab}
+                    seperator={idx !== tab.length - 1}
+                    active={tabIdx === idx}
+                    onClick={this.onClickTab.bind(this, idx)}
                 />
             )
         })
@@ -154,16 +148,17 @@ class Header extends React.Component {
                     </RightContainer>
                 </MainHeader>
 
-                <TabContainer>
-                    {tabsView}
-                </TabContainer>
+                {tab.length > 0 &&
+                    <TabContainer>
+                        {tabsView}
+                    </TabContainer>
+                }
             </Container>
         );
     }
 }
 
 Header.defaultProps = {
-    
 };
 
 export default withRouter(Header);

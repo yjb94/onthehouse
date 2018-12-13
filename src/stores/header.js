@@ -1,13 +1,19 @@
 import { observable, action } from 'mobx';
+import { DEFAULT_SELECTED_CATEGORY } from '../constants/constants';
 
 class HeaderStore {
-    @observable headerTab = [];
+    @observable tab = [];
+    @observable tabIdx = DEFAULT_SELECTED_CATEGORY;
 
-    @action setHeaderTab = (routes) => {
-        this.headerTab = routes;
+    @action setTab = (routes) => {
+        this.tab = routes;
     }
-    @action clearHeaderTab = () => {
-        this.headerTab = [];
+    @action clearTab = () => {
+        this.tab = [];
+    }
+
+    @action setTabIdx = (idx) => {
+        this.tabIdx = idx;
     }
 }
 export default new HeaderStore();

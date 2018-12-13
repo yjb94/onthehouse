@@ -18,7 +18,7 @@ const TabContainer = styled.button`
     justify-content: center;
     color:${props => props.active ? `${config.color.key}` : `${config.color.tundora}`};
 
-    transition: .2s color ease-in-out  .2s opacity ease-in-out;
+    transition: color .2s ease-in-out, opacity .2s ease-in-out;
 `;
 const Seperator = styled.div`
     color:${config.color.disabled};

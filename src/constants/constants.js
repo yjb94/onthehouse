@@ -1,0 +1,1 @@
+export const DEFAULT_SELECTED_CATEGORY = 0;
