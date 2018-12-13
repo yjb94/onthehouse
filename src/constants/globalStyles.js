@@ -8,6 +8,13 @@ export const GlobalStyle = createGlobalStyle`
         src: url('../assets/fonts/AvenirNextLTPro-Regular.otf');
     }
 
+    @font-face {
+        font-family: 'Sloop Script';
+        font-style: normal;
+        font-weight: 400;
+        src: url('../assets/fonts/sloopscript.ttf');
+    }
+
     * {
         font-size:16px;
         font-family: 'Noto Serif KR', sans-serif;

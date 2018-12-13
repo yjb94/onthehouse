@@ -20,5 +20,8 @@ export const config = {
         
         aquaHaze:"#F6F8FA",
         tundora:"#4A4A4A",
+        capeCod:'#373B39',
+        crusta:'#F7703C',
+        silverChalice:"#A8A8A8",
     },
 }
