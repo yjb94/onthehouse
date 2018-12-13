@@ -18,6 +18,8 @@ const Container = styled.div`
 
 const MasonryContainer = styled.div`
     padding: 50px 100px;
+    width: 100%;
+    box-sizing: border-box;
 
     @media (max-width: 1024px) {
         padding: 30px 30px;
