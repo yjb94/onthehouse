@@ -17,18 +17,18 @@ const Container = styled.div`
 `;
 
 const MasonryContainer = styled.div`
-    padding: 50px 100px;
+    padding: 100px 50px;
     width: 100%;
     box-sizing: border-box;
 
     @media (max-width: 1024px) {
-        padding: 30px 30px;
+        padding: 60px 30px;
     }
     @media (max-width: 764px) {
-        padding: 20px 20px;
+        padding: 40px 20px;
     }
     @media (max-width: 480px) {
-        padding: 10px 10px;
+        padding: 10px;
     }
 `;
 const LoaderContainer = styled.div`
